@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  serverimage: 
+    build: .
+    ports:
+      - "3001:3000"
+    links:
+     - mongoDB
+  mongoDB: 
+    image: mongo
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=userMongo
+      - MONGO_INITDB_ROOT_PASSWORD=password
