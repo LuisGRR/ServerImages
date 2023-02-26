@@ -4,7 +4,10 @@ const mongoose = require("mongoose");
 // mongoose.connect(
 //   "mongodb://userMongo:password@mongoDB:27017/serverImages?authSource=admin"
 // );
+mongoose.set("strictQuery", false);
 
 mongoose.connect(
-  "mongodb://luis:luis@localhost:27018/serverImages?authSource=admin"
+  "mongodb://userMongo:password@localhost:27018/serverImages?authSource=admin",
+  { useNewUrlParser: true }
 );
+// mongodb://userMongo:password@localhost:27018/serverImages?authSource=admin

@@ -10,50 +10,43 @@
   <body>
     <%- include("partials/navbar.ejs") %>
 
-    <div class="container p-4">
-      <div class="row">
-        <div class="col-md-4 offset-md-4">
-          <div class="card">
-            <div class="card-body">
-              <form
-                action="/upload"
-                method="post"
-                enctype="multipart/form-data"
-              >
-                <div class="form-group mb-3">
-                  <input
-                    type="text"
-                    name="title"
-                    placeholder="Title"
-                    class="form-control"
-                  />
-                </div>
-                <div class="input-group mb-3">
-                  <input
-                    type="file"
-                    name="image"
-                    class="form-control"
-                    id="inputGroupFile03"
-                    aria-describedby="inputGroupFileAddon03"
-                    aria-label="Upload"
-                  />
-                </div>
-                <div class="form-group m-3">
-                  <textarea
-                    name="description"
-                    class="form-control"
-                    placeholder="Description"
-                  ></textarea>
-                </div>
-                <div class="form-group m-3">
-                  <button type="submit" class="btn btn-success btn-block">
-                    Upload
-                  </button>
-                </div>
-              </form>
+    <div
+      class="pl-16 pl-64 h-screen w-full flex flex-col items-center justify-center"
+    >
+      <div
+        class="box-border w-4/5 h-auto border-2 border-solid border-slate-500 p-14"
+      >
+        <form action="/upload" method="post" enctype="multipart/form-data">
+          <div class="flex flex-col gap-y-10">
+            <div class="">
+              <input
+                type="text"
+                name="title"
+                placeholder="Title"
+                class="w-full h-10 border border-solid border-orange-900 rounded-xl focus:border-slate-900 focus:bg-orange-100 focus:outline-none focus:ring focus:ring-slate-300"
+              />
+            </div>
+            <div class="">
+              <textarea
+                name="description"
+                class="resize-y w-full h-10 border border-solid border-orange-900 rounded-xl focus:border-slate-900 focus:bg-orange-100 focus:outline-none focus:ring focus:ring-slate-300"
+                placeholder="Description"
+              ></textarea>
+            </div>
+            <div class="">
+              <input
+                type="file"
+                name="image"
+                class="w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+              />
+            </div>
+            <div class="">
+              <button type="submit" class="w-full h-10 bg-gray-600 rounded-3xl">
+                Upload
+              </button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
 

@@ -16,6 +16,7 @@ app.set("view engine", "ejs");
 //Middleware
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "public/img/uploads"),
   filename: (req, file, cb, filename) => {

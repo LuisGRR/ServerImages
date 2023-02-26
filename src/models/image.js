@@ -7,6 +7,8 @@ const imageSchema = new Schema({
   path: { type: String },
   originalname: { type: String },
   mimetype: { type: String },
+  height: { type: String },
+  width: { type: String },
   size: { type: Number },
   created_at: { type: Date, default: Date.now() },
 });
