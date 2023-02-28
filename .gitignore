@@ -2,3 +2,4 @@ node_modules/
  Local History for Visual Studio Code
 .history/
 src/public/img
+.prettierignore

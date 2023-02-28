@@ -29,6 +29,9 @@ app.use(
   }).single("image")
 );
 
+// => Here we expose your dist folder
+app.use(express.static(path.join(__dirname, "public")));
+
 //Global Variables
 app.use((req, res, next) => {
   app.locals.format = format;
