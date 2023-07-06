@@ -16,10 +16,10 @@ exports.uploadImage = async (req, res) => {
   image.size = req.file.size;
 
   try {
-    await metadataImage(image.path).then(([height, width]) => {
-      image.height = height;
-      image.width = width;
-    });
+    // await metadataImage(image.path).then(([height, width]) => {
+    //   image.height = height;
+    //   image.width = width;
+    // });
     await image.save();
     res.redirect("/");
   } catch (err) {
