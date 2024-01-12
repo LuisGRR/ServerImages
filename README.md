@@ -28,7 +28,7 @@ docker build -t ServerImages .
 Para ejecutar el proyecto en docker
 
 ```bash
-docker-compose up -d
+docker compose up
 ```
 
 >[!NOTE]
