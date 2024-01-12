@@ -1,17 +1,16 @@
-# Servididor de imagenes
+# Servidor de imágenes.
 
-## Introduccon
+## Introducción.
 
-Este es un servidor de imagenes creado con Node.ja y Express con una base de datos en mongo para su facil indexaciòn sobre las imagenes guardadas,
-las imagenes se guardan directamente en la carpeta destinada, creando una referencia de la ruta en la bd Mongo
+Este es un servidor de imágenes que se creó con Node.js y Express y tiene una base de datos en Mongo para que se puedan indexar las imágenes guardadas. Las imágenes se guardan directamente en la carpeta destinada, dando lugar a una referencia de la ruta en la bd Mongo.
 
 El proyecto utiliza ejs.js para renderizar las vistas del servidor
 
-Se  usa docker para el proyecto y todo el entorno docker-compose para crear la bd de mongo y la imagen del proyecto
+Se usa Docker para el proyecto y todo el entorno docker-compose para crear la bd de Mongo y la imagen del proyecto.
 
-## Intalaciòn
+## Instalación
 
-Para instalar las dependecias necesarias, ejecutara el sigiente comando en la terminal:
+Para instalar las dependencias necesarias, ejecutará el siguiente comando en la terminal:
 
 ```bash
 npm install
@@ -24,7 +23,7 @@ docker build -t ServerImages .
 ```
 
 >[!NOTE]
-> El . es por que la terminal esta abierta en la raiz del proycto donde se encuentra el archivo Dockerfile
+> Él `.` es porque la terminal está abierta en la raíz del proyecto donde se encuentra el archivo Dockerfile.
 
 Para ejecutar el proyecto en docker
 
@@ -33,29 +32,28 @@ docker-compose up -d
 ```
 
 >[!NOTE]
->CAmbiar la cadena de conexion de mongo en el archivo DB para apuntar al contenedor de la bd
+>Cambiar la cadena de conexión de mongo en el archivo DB para apuntar al contenedor de la bd
 
 ## Uso
 
-Para inicar el servidor, ejecutarel siguiente comando
+Para iniciar el servidor, ejecutar el siguiente comando.
 
 ```bash
 npm run dev
 ```
 
-Una vez que el servidor este funcionanado, se puede acceder a el en el navegador con la ruta `http://localhost:3000`
+Una vez que el servidor esté funcionando, se puede acceder a él en el navegador con la ruta `http://localhost:3000`
 
-## Como funciona
+## Cómo funciona
 
-Este servidor de imagenes utiliza Node.js y Express.js para servir las imagenes estaticas. Las imagenes se alamcenan en la carpeta `public/img/uploads` cada que se sube una imagen al servidor por medio del formulario, cada imagen se muestra en la pagina principal del servidor.
+Este servidor de imágenes utiliza Node.js y Express.js para servir las imágenes estáticas. Las imágenes se almacenan en la carpeta, `public/img/uploads` cada vez que se sube una imagen al servidor por medio del formulario. Cada imagen se muestra en la página principal del servidor.
 
 >[!NOTE]
->La carpeta de almcanamiento se crea cuando se sube una imagen al servidor en caso que no este creada de antelacion
+>La carpeta de almacenamiento se genera cuando se sube una imagen al servidor en caso de que no esté creada con anticipación.
 
+### Dependencias
 
-### Dependcias
-
-|Nombre|Version |
+|Nombre|Versión |
 |------|--------|
 |Express|4.18.2|
 |Node|latest|
