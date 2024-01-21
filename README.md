@@ -1,6 +1,6 @@
-# Servidor de imágenes.
+# Servidor de imágenes
 
-## Introducción.
+## Introducción
 
 Este es un servidor de imágenes que se creó con Node.js y Express y tiene una base de datos en Mongo para que se puedan indexar las imágenes guardadas. Las imágenes se guardan directamente en la carpeta destinada, dando lugar a una referencia de la ruta en la bd Mongo.
 
@@ -67,7 +67,6 @@ Este servidor de imágenes utiliza Node.js y Express.js para servir las imágene
 |uuid|9.0.1|
 |nodemon|3.0.2|
 |tailwindcss|3.4.1|
-
-
-
-
+|bcrypt|5.1.1|
+|dotenv|16.3.1|
+|express-session|1.17.3|
