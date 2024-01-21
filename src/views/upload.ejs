@@ -8,14 +8,14 @@
           <div class="w-[calc(33.33% - 30px)] mb-2 p-2 bg-white shadow-lg rounded-lg overflow-hidden">
             <img class="my-3 rounded-xl w-full h-48 object-cover" id="imgPreview" />
           </div>
-          <div class="box-border w-3/4 h-auto border-2 border-solid border-slate-500">
+          <div class="w-3/4 px-10 py-5 mx-auto rounded-lg shadow-2xl">
             <form action="/upload" method="post" enctype="multipart/form-data">
-              <div class="grid gap-6 mb-6 md:grid-cols-2">
+              <div class="flex flex-col gap-2 mb-6 md:grid-cols-2">
                 <div>
-                  <label for="User_name" class="block mb-2 text-sm font-medium text-gray-900">
+                  <label for="User_name" class="block text-sm font-medium leading-6 text-don-juan-900">
                     User name</label>
                   <input type="text" name="title" placeholder="Title" id="User_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+                    class=" block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6" />
                 </div>
                 <div>
                   <label for="description"
@@ -29,13 +29,13 @@
                   <input type="file" name="image" accept="image/*" id="img"
                     class="block w-full text-sm text-gray-900 rounded-lg cursor-pointer bg-gray-50  
                     file:mr-4 file:py-2 file:px-4
-                    file:rounded-full file:border-0
+                    file:rounded file:border-0
                     file:text-sm file:font-semibold
                     file:bg-secondaryColor file:text-detailColor
                     hover:file:bg-primaryColor" />
                 </div>
                 <div>
-                  <button type="submit" class="w-full bg-primaryColor rounded-3xl text-sm px-5 py-2.5 me-2 mb-2 text-detailColor">
+                  <button type="submit" class="w-full justify-center rounded-md bg-don-juan-900 px-3 py-1.5 text-sm font-semibold leading-6 text-detailColor shadow-sm hover:bg-don-juan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-don-juan-600">
                     Upload
                   </button>
                 </div>
