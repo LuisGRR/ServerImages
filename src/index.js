@@ -4,10 +4,16 @@ const morgan = require("morgan");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 const { format } = require("timeago.js");
+const donenv = require("dotenv");
+const session = require('express-session');
+
+//initial env
+donenv.config();
 
 //initializiones
 const app = express();
-require("./database");
+require("./config/database");
+
 // settings
 app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
@@ -23,6 +29,15 @@ const storage = multer.diskStorage({
     cb(null, uuidv4() + path.extname(file.originalname));
   },
 });
+
+app.use(
+  session({
+    secret:'tu secreto',//process.env.SECRET_KEY
+    resave:false,
+    saveUninitialized:false
+  })
+);
+
 app.use(
   multer({
     storage: storage,
@@ -45,7 +60,6 @@ app.use(require("./routers/index"));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Start the server
-
 app.listen(app.get("port"), () => {
   console.log(`Server on port ${app.get("port")}`);
 });

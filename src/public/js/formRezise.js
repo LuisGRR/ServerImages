@@ -32,7 +32,7 @@ form.addEventListener("submit", (event) => {
     })
     .then((data) => {
       console.log(data.message);
-      window.location.replace("/");
+      window.location.replace("/home");
     })
     .catch((error) => {
       console.error(error);

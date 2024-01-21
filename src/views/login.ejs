@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Server image login</title>
+    <%- include("partials/headScripts.ejs") %>
+  </head>
+  <body>
+      <div class="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8 from-don-juan-900 via-don-juan-800 to-don-juan-500 bg-gradient-to-br">
+      
+      <% if (numUser > 1) { %>
+      <div class="bg-detailColor bg-opacity-25 w-full max-w-lg px-10 py-8 mx-auto rounded-lg shadow-2xl">
+        <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm flex flex-row justify-center">
+          <h2 class="text-detailColor text-3xl">Sing in</h2>
+        </div>
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form id="loginForm" method="POST" class="space-y-6">
+              <div>
+                <label for="user" class="block text-sm font-medium leading-6 text-detailColor">User name</label>
+                <div class="mt-2">
+                  <input class="bg-don-juan-700 block w-full rounded-md border-0 py-1.5 text-secondaryColor shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6" 
+                    type="text" name="name" id="user" placeholder="User" required />
+                </div>
+              </div>
+              <div>
+                <label for="password" class="block text-sm font-medium leading-6 text-detailColor">Password</label>
+                <div class="mt-2">
+                  <input class="bg-don-juan-700 block w-full rounded-md border-0 py-1.5 text-secondaryColor shadow-sm ring-1 ring-inset ring-don-juan-800 placeholder:text-secondaryColor focus:ring-2 focus:ring-inset focus:ring-don-juan-600 sm:text-sm sm:leading-6"
+                    required type="password" name="password" id="password" placeholder="Password" />
+                </div>
+              </div>
+              <div>
+                <button type="submit" class="flex w-full justify-center rounded-md bg-don-juan-900 px-3 py-1.5 text-sm font-semibold leading-6 text-detailColor shadow-sm hover:bg-don-juan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-don-juan-600"> Login </button>
+              </div>
+            </form>
+        </div>
+      </div>
+      <% }else{ %>
+        <div class="bg-detailColor bg-opacity-25 w-full max-w-lg px-10 py-8 mx-auto rounded-lg shadow-2xl">
+          <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm flex flex-row justify-center">
+            <h2 class="text-detailColor text-3xl">Register</h2>
+          </div>
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form id="loginRegiste" method="POST" class="space-y-6">
+              <div>
+                <label for="user" class="block text-sm font-medium leading-6 text-detailColor">User name</label>
+                <div class="mt-2"> 
+                  <input class="bg-don-juan-700 block w-full rounded-md border-0 py-1.5 text-secondaryColor shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6" type="text" name="user" placeholder="Name user" />
+                </div>
+              </div>
+              <div>
+                <label for="password-register" class="block text-sm font-medium leading-6 text-detailColor">Password</label>
+                <div class="mt-2">
+                  <input class="bg-don-juan-700 block w-full rounded-md border-0 py-1.5 text-secondaryColor shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6" type="text" name="password-register" placeholder="passsword" />
+                </div>
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium leading-6 text-detailColor">Email</label>
+                <div class="mt-2">
+                  <input class="bg-don-juan-700 block w-full rounded-md border-0 py-1.5 text-secondaryColor shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6" type="email" name="email" placeholder="example@exmaple" required />
+                </div>
+              </div>
+              <div>
+                <button type="submit" class="flex w-full justify-center rounded-md bg-primaryColor px-3 py-1.5 text-sm font-semibold leading-6 text-detailColor shadow-sm hover:bg-secondaryColor focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primaryColor">Register</button>
+              </div>
+          </form>
+        </div>
+      </div>
+      <% } %>
+      
+      </div>
+      <% if (numUser > 1) { %>
+        <script src="/js/formLoigin.js"></script>
+      <% }else{ %>
+        <script src="/js/formRegister.js"></script>
+      <% } %>
+  </body>
+
+  </html>

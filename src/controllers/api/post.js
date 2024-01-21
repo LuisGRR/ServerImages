@@ -16,12 +16,12 @@ exports.uploadImage = async (req, res) => {
   image.size = req.file.size;
 
   try {
-    // await metadataImage(image.path).then(([height, width]) => {
-    //   image.height = height;
-    //   image.width = width;
-    // });
+    await metadataImage(image.path).then(([height, width]) => {
+       image.height = height;
+       image.width = width;
+    });
     await image.save();
-    res.redirect("/");
+    res.redirect("/home");
   } catch (err) {
     console.log(`Error al obtener metadata de la imagen: ${err}`);
     res.status(500).send("Error al guardar la imagen en la base de datos.");
@@ -29,7 +29,7 @@ exports.uploadImage = async (req, res) => {
 };
 
 exports.rezise = async (req, res) => {
-  const dirBase = "D:\\Proyectos\\Web\\ServerImages\\src\\";
+  const dirBase = path.resolve(__dirname,'../..');
 
   const { width, height, imgPhat, id } = req.body;
 
@@ -43,14 +43,16 @@ exports.rezise = async (req, res) => {
   image.path = "/img/rezise/" + imgName;
   image.originalname = imageInfo.filename;
   image.mimetype = imageInfo.mimetype;
-
   try {
+    fs.mkdir(path.join(path.resolve(__dirname,'../..'), "public/img/rezise/"),{recursive: true},(err)=>{
+      if(err) throw err;
+    });
     await reziseImage(imgPhat, imgName, width, height);
-    await metadataImage(image.path).then(([height, width]) => {
+    //await metadataImage(image.path).then(([height, width]) => {
       image.height = height;
       image.width = width;
-    });
-    image.size = await fs.statSync(
+    //});
+    image.size = fs.statSync(
       path.join(dirBase, "public/img/rezise/") + imgName
     ).size;
 
@@ -59,7 +61,7 @@ exports.rezise = async (req, res) => {
       message: "El recurso ha sido eliminado exitosamente",
     });
   } catch (err) {
-    console.log(`Error al redimensionar la imagen: ${err}`);
+    console.log(`Error al manipular la imagen: ${err}`);
     res.status(500).send("Error al redimensionar la imagen");
   }
 };

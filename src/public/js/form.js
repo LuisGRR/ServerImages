@@ -11,9 +11,6 @@ form.addEventListener("submit", (event) => {
     title: title.value,
     description: description.value,
   };
-
-  console.log(formData);
-
   fetch(`/image/${id.value}/edit`, {
     method: "PUT",
     headers: {
@@ -28,8 +25,7 @@ form.addEventListener("submit", (event) => {
       return response.json();
     })
     .then((data) => {
-      console.log(data.message);
-      window.location.replace("/");
+      window.location.replace("/home");
     })
     .catch((error) => {
       console.error(error);

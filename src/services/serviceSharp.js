@@ -1,11 +1,9 @@
 const sharp = require("sharp");
 const path = require("path");
 
-const dirBase = "D:\\Proyectos\\Web\\ServerImages\\src\\";
-
-function metadataImage(image) {
+async function metadataImage(image) {
   return new Promise((resolve, reject) => {
-    sharp(path.join(dirBase, "public", image))
+    sharp(path.join(path.resolve(__dirname,'..'), "public", image))
       .metadata()
       .then((metadata) => {
         console.log(metadata.height);
@@ -41,23 +39,27 @@ function metadataImageWidth(image) {
     });
 }
 
-function reziseImage(pahtImg, filename, width, height) {
+async function reziseImage(pahtImg, filename, width, height) {
   return new Promise((resolve, reject) => {
-    sharp(path.join(dirBase, "public", pahtImg))
+    sharp(path.join(path.resolve(__dirname,'..'),'public', pahtImg))
       .resize({
         width: parseInt(width),
         height: parseInt(height),
       })
-      .toFile(path.join(dirBase, "public/img/rezise/") + filename)
-      .then((result) => {
-        console.log(`Imagen redimensionada correctamente: ${result}`);
+      .toFile(path.join(path.resolve(__dirname,'..'), "public/img/rezise/") + filename)
+      .then((result) => {;
         resolve(result);
       })
       .catch((err) => {
-        console.log(`Error al redimencionar la imagen: ${err}`);
         reject(err);
       });
-  });
+  })
+    .then(message =>{
+      console.log(message);
+    })
+    .catch(err =>{
+      console.log(err)
+    });
 }
 
 module.exports = {

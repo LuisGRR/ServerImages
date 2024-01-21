@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image profile</title>
-    <%- include("partials/head.ejs") %>
-  </head>
+<%- include("partials/head.ejs") %>
   <body>
     <%- include("partials/navbar.ejs") %>
 
@@ -48,18 +40,18 @@
         >
           <a
             href="/image/<%= image._id%>/edit"
-            class="text-base text-center font-medium rounded-lg p-3 border border-solid border-orange-900 rounded-md"
+            class="text-base text-center font-medium rounded-lg p-3 border border-solid border-orange-900"
             >Modify</a
           >
           <a
             href="/image/<%= image._id%>/rezise"
-            class="text-base text-center font-medium rounded-lg p-3 border border-solid border-orange-900 rounded-md"
+            class="text-base text-center font-medium rounded-lg p-3 border border-solid border-orange-900"
             >Rezise</a
           >
           <button
             id="btnDelete"
             value="<%= image._id%>"
-            class="text-base font-medium rounded-lg p-3 border border-solid border-orange-900 rounded-md"
+            class="text-base font-medium rounded-lg p-3 border border-solid border-orange-900"
           >
             Delete Image
           </button>

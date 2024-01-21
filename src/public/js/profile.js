@@ -6,7 +6,7 @@ const deleteImage = (id) => {
   })
     .then((data) => {
       console.log(data);
-      window.location.replace("/");
+      window.location.replace("/home");
     })
     .catch((error) => {
       console.error(error);
