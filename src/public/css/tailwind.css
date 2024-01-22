@@ -539,9 +539,6 @@ video {
 .table {
   display: table;
 }
-.grid {
-  display: grid;
-}
 .hidden {
   display: none;
 }
@@ -600,9 +597,6 @@ video {
   -moz-columns: 4;
        columns: 4;
 }
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
 .flex-row {
   flex-direction: row;
 }
@@ -620,6 +614,9 @@ video {
 }
 .justify-between {
   justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
 }
 .justify-evenly {
   justify-content: space-evenly;
@@ -655,6 +652,9 @@ video {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.whitespace-nowrap {
+  white-space: nowrap;
+}
 .rounded-3xl {
   border-radius: 1.5rem;
 }
@@ -682,9 +682,9 @@ video {
 .border-solid {
   border-style: solid;
 }
-.border-primaryColor {
+.border-don-juan-900 {
   --tw-border-opacity: 1;
-  border-color: rgb(89 69 69 / var(--tw-border-opacity));
+  border-color: rgb(72 59 61 / var(--tw-border-opacity));
 }
 .bg-detailColor {
   --tw-bg-opacity: 1;
@@ -694,6 +694,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(89 69 69 / var(--tw-bg-opacity));
 }
+.bg-don-juan-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(82 65 66 / var(--tw-bg-opacity));
+}
 .bg-don-juan-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(72 59 61 / var(--tw-bg-opacity));
@@ -701,10 +705,6 @@ video {
 .bg-primaryColor {
   --tw-bg-opacity: 1;
   background-color: rgb(89 69 69 / var(--tw-bg-opacity));
-}
-.bg-secondaryColor {
-  --tw-bg-opacity: 1;
-  background-color: rgb(129 91 91 / var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -746,21 +746,17 @@ video {
 .p-4 {
   padding: 1rem;
 }
-.px-0 {
-  padding-left: 0px;
-  padding-right: 0px;
-}
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
+.px-20 {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-}
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 .px-6 {
   padding-left: 1.5rem;
@@ -778,6 +774,10 @@ video {
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -790,26 +790,11 @@ video {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-.pb-3 {
-  padding-bottom: 0.75rem;
-}
 .pl-16 {
   padding-left: 4rem;
 }
-.pl-20 {
-  padding-left: 5rem;
-}
-.pl-4 {
-  padding-left: 1rem;
-}
 .pl-64 {
   padding-left: 16rem;
-}
-.pl-8 {
-  padding-left: 2rem;
-}
-.pt-0 {
-  padding-top: 0px;
 }
 .text-left {
   text-align: left;
@@ -833,6 +818,10 @@ video {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
 .font-bold {
   font-weight: 700;
 }
@@ -844,6 +833,9 @@ video {
 }
 .font-semibold {
   font-weight: 600;
+}
+.uppercase {
+  text-transform: uppercase;
 }
 .not-italic {
   font-style: normal;
@@ -952,13 +944,33 @@ video {
   --tw-text-opacity: 1;
   color: rgb(129 91 91 / var(--tw-text-opacity));
 }
+.odd\:bg-don-juan-500:nth-child(odd) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(137 110 105 / var(--tw-bg-opacity));
+}
+.even\:bg-don-juan-600:nth-child(even) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 91 89 / var(--tw-bg-opacity));
+}
+.hover\:bg-don-juan-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(151 127 120 / var(--tw-bg-opacity));
+}
 .hover\:bg-don-juan-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(117 91 89 / var(--tw-bg-opacity));
 }
+.hover\:bg-don-juan-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(89 69 69 / var(--tw-bg-opacity));
+}
 .hover\:bg-secondaryColor:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(129 91 91 / var(--tw-bg-opacity));
+}
+.hover\:text-don-juan-100:hover {
+  --tw-text-opacity: 1;
+  color: rgb(229 223 220 / var(--tw-text-opacity));
 }
 .hover\:file\:bg-primaryColor::file-selector-button:hover {
   --tw-bg-opacity: 1;
@@ -1050,10 +1062,6 @@ video {
 
   .lg\:w-64 {
     width: 16rem;
-  }
-
-  .lg\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lg\:px-8 {
