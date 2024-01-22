@@ -596,6 +596,10 @@ video {
 .resize-y {
   resize: vertical;
 }
+.columns-4 {
+  -moz-columns: 4;
+       columns: 4;
+}
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -622,6 +626,9 @@ video {
 }
 .gap-2 {
   gap: 0.5rem;
+}
+.gap-8 {
+  gap: 2rem;
 }
 .gap-y-10 {
   row-gap: 2.5rem;
