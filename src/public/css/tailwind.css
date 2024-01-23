@@ -569,11 +569,14 @@ video {
 .w-16 {
   width: 4rem;
 }
+.w-2\/5 {
+  width: 40%;
+}
 .w-3\/4 {
   width: 75%;
 }
-.w-4\/5 {
-  width: 80%;
+.w-5\/12 {
+  width: 41.666667%;
 }
 .w-full {
   width: 100%;
@@ -673,9 +676,6 @@ video {
 .border-0 {
   border-width: 0px;
 }
-.border-2 {
-  border-width: 2px;
-}
 .border-b {
   border-bottom-width: 1px;
 }
@@ -745,6 +745,9 @@ video {
 }
 .p-4 {
   padding: 1rem;
+}
+.p-5 {
+  padding: 1.25rem;
 }
 .px-10 {
   padding-left: 2.5rem;
@@ -873,6 +876,11 @@ video {
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.shadow-xl {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .ring-1 {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -894,9 +902,6 @@ video {
 }
 .file\:rounded::file-selector-button {
   border-radius: 0.25rem;
-}
-.file\:rounded-full::file-selector-button {
-  border-radius: 9999px;
 }
 .file\:border-0::file-selector-button {
   border-width: 0px;
@@ -923,10 +928,6 @@ video {
 .file\:text-detailColor::file-selector-button {
   --tw-text-opacity: 1;
   color: rgb(255 248 234 / var(--tw-text-opacity));
-}
-.file\:text-textColor::file-selector-button {
-  --tw-text-opacity: 1;
-  color: rgb(158 118 118 / var(--tw-text-opacity));
 }
 .placeholder\:text-primaryColor::-moz-placeholder {
   --tw-text-opacity: 1;
@@ -975,10 +976,6 @@ video {
 .hover\:file\:bg-primaryColor::file-selector-button:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(89 69 69 / var(--tw-bg-opacity));
-}
-.hover\:file\:bg-secondaryColor::file-selector-button:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(129 91 91 / var(--tw-bg-opacity));
 }
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
