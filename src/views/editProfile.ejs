@@ -14,33 +14,38 @@
         />
       </div>
       <div
-        class="box-border w-4/5 h-auto border-2 border-solid border-slate-500 p-14"
+        class="w-3/4 px-10 py-5 mx-auto rounded-lg shadow-xl"
       >
         <form action="#" method="PUT">
-          <div class="flex flex-col gap-y-10">
+          <div class="flex flex-col gap-2 mb-6 md:grid-cols-2">
             <div class="">
+              <label for="User_name" class="block text-sm font-medium leading-6 text-don-juan-900">
+                Title</label>
               <input
                 value="<%= image.title  %>"
                 type="text"
                 name="title"
                 placeholder="Title"
-                class="w-full h-10 border border-solid border-orange-900 rounded-md focus:border-slate-900 focus:bg-orange-100 focus:outline-none focus:ring focus:ring-slate-300"
+                class=" block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6"
               />
             </div>
-            <div class="">
+            <div>
+              <label for="description"
+              class="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
               <textarea
                 name="description"
-                class="resize-y w-full h-10 border border-solid border-orange-900 rounded-md focus:border-slate-900 focus:bg-orange-100 focus:outline-none focus:ring focus:ring-slate-300"
+                rows="4"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
                 placeholder="Description"
               >
 <%= image.description  %></textarea
               >
             </div>
             <input type="hidden" name="userId" value="<%= image._id%>" />
-            <div class="">
+            <div>
               <button
                 type="submit"
-                class="w-full h-10 bg-primaryColor rounded-3xl text-detailColor"
+                class="w-full justify-center rounded-md bg-don-juan-900 px-3 py-1.5 text-sm font-semibold leading-6 text-detailColor shadow-sm hover:bg-don-juan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-don-juan-600"
               >
                 Upload
               </button>
