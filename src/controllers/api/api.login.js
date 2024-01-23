@@ -32,12 +32,21 @@ exports.login = async (req,res) => {
 
 exports.register = async (req,res) => {
   let body = req.body;
+  let numUsers = await UsuarioRepository.numUsers();
+  if(numUsers > 1){
+    return res.status(400).json({
+      ok:false,
+      err:{
+        message:"Ya existen mas ususarios de los configurados"
+      }
+    });
+  }
 
-  let user = await UsuarioRepository.SaveUser(body.name,body.password);
+  let user = await UsuarioRepository.SaveUser(body.name,body.password,body.email);
 
   req.session.userId = user._id;
 
-  res.status(200).json({
+  return res.status(200).json({
       ok:true,
       user
   });
@@ -51,4 +60,11 @@ exports.logout = async (req,res) => {
       res.redirect("/")
     }
   });
+}
+
+exports.retrievePassword = (req,res) =>{
+  let body =req.body;
+  let user = UsuarioRepository.UserFindOneUserEmail(body.name,body.email);
+
+  
 }
