@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js",
-    "build:css": "postcss src/styles/index.css -o src/public/css/tailwind.css"
+    "build:css": "postcss src/styles/index.css -o src/public/css/tailwind.css",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,9 @@
   },
   "devDependencies": {
     "autoprefixer": "10.4.16",
+    "eslint": "^8.56.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
     "nodemon": "3.0.2",
     "postcss": "8.4.33",
     "postcss-cli": "11.0.0",
