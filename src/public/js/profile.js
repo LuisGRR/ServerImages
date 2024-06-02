@@ -5,14 +5,37 @@ const deleteImage = (id) => {
     method: "DELETE",
   })
     .then((data) => {
-      console.log(data);
-      window.location.replace("/home");
+      Swal.fire({
+        position: "top-end",
+        title: "Deleted!",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        window.location.replace("/home");
+      });
     })
     .catch((error) => {
-      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong to the delete image!",
+      });
     });
 };
 
 button.addEventListener("click", function () {
-  deleteImage(button.value);
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteImage(button.value)
+    }
+  });
 });

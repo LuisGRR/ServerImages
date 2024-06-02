@@ -1,9 +1,9 @@
 const form = document.querySelector("form");
 
-const width = document.querySelector('input[name="width"]');
-const height = document.querySelector('input[name="height"]');
-const imgPhat = document.querySelector('input[name="imgPhat"]');
-const id = document.querySelector('input[name="userId"]');
+const width = document.querySelector("input[name=\"width\"]");
+const height = document.querySelector("input[name=\"height\"]");
+const imgPhat = document.querySelector("input[name=\"imgPhat\"]");
+const id = document.querySelector("input[name=\"userId\"]");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -15,9 +15,7 @@ form.addEventListener("submit", (event) => {
     id: id.value,
   };
 
-  console.log(formData);
-
-  fetch(`/image/rezise`, {
+  fetch("/image/rezise", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,10 +29,20 @@ form.addEventListener("submit", (event) => {
       return response.json();
     })
     .then((data) => {
-      console.log(data.message);
-      window.location.replace("/home");
+      Swal.fire({
+        position: "top-end",
+        title: "Rezise!",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        window.location.replace("/home");
+      });
     })
     .catch((error) => {
-      console.error(error);
-    });
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong to the rezise image!",
+      });    });
 });

@@ -10,16 +10,16 @@ module.exports = {
                 "node": true
             },
             "files": [
-                ".eslintrc.{js,cjs}"
+                ".eslintrc.{js}"
             ],
             "parserOptions": {
                 "sourceType": "script"
-            }
-        }
+            }        }
     ],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
     "rules": {
+        "quotes": [2, "double"]
     }
 }

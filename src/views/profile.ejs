@@ -1,4 +1,12 @@
-<%- include("partials/head.ejs") %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ServerImage | Profile</title>
+    <%- include("partials/headScripts.ejs") %>
+  </head>
 
   <body>
     <%- include("partials/navbar.ejs") %>
@@ -22,6 +30,18 @@
             <p class="not-italic font-normal leading-10">
               Description: <%= image.description %>
             </p>
+            <div class="flex flex-row justify-around">
+              <p class="not-italic font-normal leading-10">
+                Tags:
+              </p>
+              <ul class="flex flex-row justify-around items-center">
+                <% image.tags.forEach(tag=> { %>
+                  <li class="border p-1 mx-2 text-center">
+                    <%= tag %>
+                  </li>
+                  <% }); %>
+              </ul>
+            </div>
             <div class="flex flex-row justify-around">
               <p class="not-italic font-normal leading-10">
                 Create at: <%= format(new Date(image.created_at)) %>
@@ -54,7 +74,7 @@
 
         <%- //include("partials/footerCss.ejs") %>
       </div>
-      <%- include("partials/footerimposrtsJS.ejs") %>
-  </body>
+      <script src="/js/profile.js"></script>
+    </body>
 
   </html>
