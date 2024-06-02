@@ -19,6 +19,12 @@ const deleteController = require("../controllers/api/delete");
 //controllers for put
 const putController = require("../controllers/api/put");
 
+//controllers for Tags
+const apiTags = require("../controllers/api/tags");
+
+//Controllers for images
+const Images = require("../controllers/api/images.api");
+
 //views for get
 
 //view Login
@@ -39,7 +45,6 @@ router.get("/image/:id/edit", middlewareSession.checkLoggedIn, vista.imageEdit);
 
 router.get("/image/:id/rezise", middlewareSession.checkLoggedIn, vista.imageRezise);
 
-//API REST
 router.post("/upload", middlewareSession.checkLoggedIn, postController.uploadImage);
 
 router.post("/image/rezise", middlewareSession.checkLoggedIn, postController.rezise);
@@ -48,12 +53,20 @@ router.delete("/image/:id/delete", middlewareSession.checkLoggedIn, deleteContro
 
 router.put("/image/:id/edit",middlewareSession.checkLoggedIn ,putController.editImage);
 
-//login api
+//login
 
 router.post("/login",apiLogin.login);
 
 router.post("/register",apiLogin.register);
 
 router.get("/logout",middlewareSession.checkLoggedIn ,apiLogin.logout);
+
+//API REST
+router.get("/images",Images.images);
+
+//Tags api
+
+router.get("/tags",apiTags.tags);
+router.post("/tag",apiTags.tagSave);
 
 module.exports = router;

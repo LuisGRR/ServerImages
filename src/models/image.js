@@ -10,6 +10,10 @@ const imageSchema = new Schema({
   height: { type: String },
   width: { type: String },
   size: { type: Number },
+  tags:{
+    type:[String],
+    default:[]
+  },
   created_at: { type: Date, default: Date.now() },
   update_at:{ type: Date, default: Date.now() },
 });
