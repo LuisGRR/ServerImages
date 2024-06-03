@@ -26,10 +26,9 @@ exports.tagSave = async (req, res) => {
         },
       });
     }
-    const savedTags = [];
-
+    
     for (let tagName of tags) {
-      const savedTag = await TagsRepository.TagSave(tagName);
+      await TagsRepository.TagSave(tagName);
     }
 
     return res.status(200).json({

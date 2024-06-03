@@ -44,5 +44,6 @@ form.addEventListener("submit", (event) => {
         icon: "error",
         title: "Oops...",
         text: "Something went wrong to the rezise image!",
-      });    });
+      });
+    });
 });

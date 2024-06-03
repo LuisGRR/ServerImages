@@ -3,7 +3,7 @@ const path = require("path");
 
 async function metadataImage(image) {
   return new Promise((resolve, reject) => {
-    sharp(path.join(path.resolve(__dirname,'..'), "public", image))
+    sharp(path.join(path.resolve(__dirname, '..'), "public", image))
       .metadata()
       .then((metadata) => {
         console.log(metadata.height);
@@ -41,24 +41,24 @@ function metadataImageWidth(image) {
 
 async function reziseImage(pahtImg, filename, width, height) {
   return new Promise((resolve, reject) => {
-    sharp(path.join(path.resolve(__dirname,'..'),'public', pahtImg))
+    sharp(path.join(path.resolve(__dirname, '..'), 'public', pahtImg))
       .resize({
         width: parseInt(width),
         height: parseInt(height),
         fit: sharp.fit.fill
       })
-      .toFile(path.join(path.resolve(__dirname,'..'), "public/img/rezise/") + filename)
-      .then((result) => {;
+      .toFile(path.join(path.resolve(__dirname, '..'), "public/img/rezise/") + filename)
+      .then((result) => {
         resolve(result);
       })
       .catch((err) => {
         reject(err);
       });
   })
-    .then(message =>{
+    .then(message => {
       console.log(message);
     })
-    .catch(err =>{
+    .catch(err => {
       console.log(err)
     });
 }

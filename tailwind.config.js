@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/*.{html,js,css}", "./src/views/**/*.ejs"],
+  content: ['./src/*.{html,js,css}', './src/views/**/*.ejs'],
   theme: {
     colors: {
       'primaryColor': "#594545",
@@ -19,7 +19,7 @@ module.exports = {
         '800': '#524142',
         '900': '#483b3d',
         '950': '#282022',
-    },
+      },
     },
   },
   plugins: [

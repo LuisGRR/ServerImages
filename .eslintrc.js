@@ -2,24 +2,28 @@ module.exports = {
     "env": {
         "browser": true,
         "commonjs": true,
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
+    extends: [
+        "plugin:node/recommended",
+    ],
     "overrides": [
         {
-            "env": {
-                "node": true
-            },
             "files": [
                 ".eslintrc.{js}"
             ],
             "parserOptions": {
                 "sourceType": "script"
-            }        }
+            }
+        }
     ],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
     "rules": {
-        "quotes": [2, "double"]
+        "no-unused-vars": ["error", { "argsIgnorePattern": "req|res|next" }],
+        "no-console": "off",
+        
     }
 }
