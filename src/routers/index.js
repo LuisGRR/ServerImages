@@ -3,9 +3,9 @@ const router = Router();
 
 const middlewareSession = require("../middlewares/middleware.session");
 
-const vista = require("../controllers/vistas");
+const vista = require("../controllers/views/vistas");
 
-const viewLogin = require("../controllers/login.view");
+const viewLogin = require("../controllers/views/login.view");
 
 //controller logini
 const apiLogin = require("../controllers/api/api.login");
@@ -29,7 +29,7 @@ const Images = require("../controllers/api/images.api");
 
 //view Login
 
-router.get("/",viewLogin.view );
+router.get("/",viewLogin.viewLogin );
 
 //views for imgs
 router.get("/home", middlewareSession.checkLoggedIn, vista.index);

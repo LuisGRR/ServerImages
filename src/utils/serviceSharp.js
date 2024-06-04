@@ -47,7 +47,7 @@ async function reziseImage(pahtImg, filename, width, height) {
         height: parseInt(height),
         fit: sharp.fit.fill
       })
-      .toFile(path.join(path.resolve(__dirname, '..'), "public/img/rezise/") + filename)
+      .toFile(path.join(path.resolve(__dirname, '..'), "public/img/resize/") + filename)
       .then((result) => {
         resolve(result);
       })

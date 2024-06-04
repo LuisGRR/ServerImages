@@ -2,7 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,dotenv
 
 src/public/img/uploads
-src/public/img/rezise
+src/public/img/resize
 
 ### dotenv ###
 .env

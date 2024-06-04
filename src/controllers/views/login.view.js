@@ -1,6 +1,6 @@
-const usersRepo = require('../repositories/RepositorieUser');
+const usersRepo = require('../../repositories/UserRespository');
 
-exports.view = async (req, res) => {
+exports.viewLogin = async (req, res) => {
   try {
     const numUser = await usersRepo.numUsers();
     res.render("login", { numUser: numUser });

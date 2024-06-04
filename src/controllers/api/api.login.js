@@ -1,4 +1,4 @@
-const UsuarioRepository = require("../../repositories/RepositorieUser");
+const UsuarioRepository = require("../../repositories/UserRespository");
 const bcrypt = require("bcrypt");
 
 exports.login = async (req, res) => {

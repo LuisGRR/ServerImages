@@ -1,4 +1,4 @@
-const TagsRepository = require('../../repositories/RespositoriTags');
+const TagsRepository = require('../../repositories/tagsRespository');
 
 exports.tags = async (req, res) => {
   try {
