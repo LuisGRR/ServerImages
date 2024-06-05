@@ -84,7 +84,6 @@ async function validateTag(tagsValues = []) {
   let tags = tagsValues.filter(tag => !tagsName.includes(tag));
   try {
     if (tags.length > 0) {
-      console.log(tags)
 
       const response = await fetch("/tag", {
         method: "POST",
@@ -176,6 +175,6 @@ form.addEventListener("submit", async function (event) {
       title: "Oops...",
       text: "Something went wrong to the save image!",
     });
-    console.log("Error:" + error);
+    //console.log("Error:" + error);
   }
 });

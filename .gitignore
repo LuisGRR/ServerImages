@@ -3,6 +3,8 @@
 
 src/public/img/uploads
 src/public/img/resize
+src/public/img/convert
+
 
 ### dotenv ###
 .env

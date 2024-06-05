@@ -24,10 +24,10 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
       }
       return response.json();
     })
-    .then(() => {
+    .then(() => {console.log
       window.location.replace("/home");
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
     });
 });

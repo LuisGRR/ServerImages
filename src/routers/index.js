@@ -38,16 +38,20 @@ router.get("/upload", middlewareSession.checkLoggedIn, vista.upload);
 
 router.get("/resizes", middlewareSession.checkLoggedIn, vista.resizes);
 
-//img manipulation routers
+//img manipulation view
 router.get("/image/:id", middlewareSession.checkLoggedIn, vista.imageById);
 
 router.get("/image/:id/edit", middlewareSession.checkLoggedIn, vista.imageEdit);
 
-router.get("/image/:id/rezise", middlewareSession.checkLoggedIn, vista.imageRezise);
+router.get("/image/:id/:type", middlewareSession.checkLoggedIn, vista.imageManipulation);
 
+// routers img
 router.post("/upload", middlewareSession.checkLoggedIn, postController.uploadImage);
 
 router.post("/image/rezise", middlewareSession.checkLoggedIn, postController.rezise);
+
+router.post("/image/convert", middlewareSession.checkLoggedIn, postController.convert);
+
 
 router.delete("/image/:id/delete", middlewareSession.checkLoggedIn, deleteController.deleteImage);
 
@@ -61,12 +65,12 @@ router.post("/register",apiLogin.register);
 
 router.get("/logout",middlewareSession.checkLoggedIn ,apiLogin.logout);
 
-//API REST
-router.get("/images",Images.images);
-
 //Tags api
 
-router.get("/tags",apiTags.tags);
-router.post("/tag",apiTags.tagSave);
+router.get("/tags",middlewareSession.checkLoggedIn ,apiTags.tags);
+router.post("/tag",middlewareSession.checkLoggedIn ,apiTags.tagSave);
+
+//API REST
+router.get("/images",Images.images);
 
 module.exports = router;

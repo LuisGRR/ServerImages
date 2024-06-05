@@ -5,7 +5,7 @@ exports.uploadImage = async (req, res) => {
    ImageService.saveImage(req.body, req.file)
     res.redirect("/home");
   } catch (err) {
-    console.log(`Error al obtener metadata de la imagen: ${err}`);
+    //console.log(`Error al obtener metadata de la imagen: ${err}`);
     res.status(500).send("Error al guardar la imagen en la base de datos.");
   }
 };
@@ -14,10 +14,23 @@ exports.rezise = async (req, res) => {
   try {
     ImageService.reziseImage(req.body);
     res.status(200).json({
-      message: "El recurso ha sido eliminado exitosamente",
+      message: "El recurso ha se ha redimensionar exitosamente",
     });
   } catch (err) {
-    console.log(`Error al manipular la imagen: ${err}`);
+    //console.log(`Error al manipular la imagen: ${err}`);
     res.status(500).send("Error al redimensionar la imagen");
   }
 };
+
+exports.convert = async (req, res) => {
+  try {
+    ImageService.convertImage(req.body);
+    res.status(200).json({
+      message: `El recurso ha sido convertido ${req.body.typeConvert} exitosamente`,
+    });
+  } catch (err) {
+    //console.log(`Error al manipular la imagen: ${err}`);
+    res.status(500).send("Error al redimensionar la imagen");
+  }
+};
+

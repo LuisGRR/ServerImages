@@ -1,23 +1,19 @@
 const form = document.querySelector("form");
 
-const width = document.querySelector("input[name=\"width\"]");
-const height = document.querySelector("input[name=\"height\"]");
 const imgPhat = document.querySelector("input[name=\"imgPhat\"]");
-const typeResize = document.getElementById("selectType");
+const typeConvert = document.getElementById("selectType");
 const id = document.querySelector("input[name=\"userId\"]");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const formData = {
-    width: width.value,
-    height: height.value,
     imgPhat: imgPhat.value,
-    typeResize: typeResize.value,
+    typeConvert: typeConvert.value,
     id: id.value,
   };
 
-  fetch("/image/rezise", {
+  fetch("/image/convert", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

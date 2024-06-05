@@ -11,15 +11,15 @@ exports.TagsFind = async () => {
 
 exports.TagSave = async (name) => {
     try {
-        console.log(name);
+        //console.log(name);
         let tag = new Tags({
             name: name,
         });
 
-        const saveTag = await tag.save();
-        console.log(saveTag);
+        await tag.save();
+        //console.log(saveTag);
     } catch (err) {
-        console.log(err)
+        //console.log(err)
         throw new Error("Error al momento de guardar la imagen"+err);
     }
 }

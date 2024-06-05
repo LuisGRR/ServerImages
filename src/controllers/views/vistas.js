@@ -39,8 +39,8 @@ exports.imageEdit = async (req, res) => {
   res.render("editProfile", { image });
 };
 
-exports.imageRezise = async (req, res) => {
-  const { id } = req.params;
+exports.imageManipulation = async (req, res) => {
+  const { id,type } = req.params;
   const image = await Image.findIdImage(id);
-  res.render("resizeImage", { image });
+  res.render("monipulationImage", { image:image,type:type,mimetype: image.mimetype   });
 };

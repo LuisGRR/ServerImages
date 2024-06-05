@@ -10,13 +10,17 @@
               class=" h-60 bg-white shadow-lg rounded-lg overflow-hidden" />
           </div>
           <div class="mt-5 whitespace-nowrap flex justify-around">
-            <p>Width: <span><%= image.width  %></span> </p>
-            <p>Height: <span><%= image.height  %></p>
+            <p>Width: <span>
+                <%= image.width %>
+              </span> </p>
+            <p>Height: <span>
+                <%= image.height %>
+            </p>
           </div>
         </div>
         <div class=" px-10 py-5 rounded-lg shadow-xl">
           <form action="#" method="POST">
-            <div class="flex flex-col gap-2 mb-6 md:grid-cols-2">
+            <div class="flex flex-col gap-3 mb-6 md:grid-cols-2">
               <div>
                 <label for="width" class="block text-sm font-medium leading-6 text-don-juan-900">
                   Width</label>
@@ -28,6 +32,18 @@
                   Height</label>
                 <input id="height" type="text" name="height" placeholder="000"
                   class=" block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6" />
+              </div>
+              <div>
+                <label for="selectType" class="block text-sm font-medium leading-6 text-don-juan-900">Type</label>
+                <select name="selectType" id="selectType"
+                  class=" border-0 text-sm rounded-md shadow-sm ring-1 focus:ring-don-juan-500 focus:border-don-juan-900 block w-full py-1.5">
+                  <option value="fill" selected>fill</option>
+                  <option value="cover">cover</option>
+                  <option value="contain" >contain</option>
+                  <option value="inside">inside</option>
+                  <option value="outside">outside</option>
+                </select>
+
               </div>
               <input id="imgPhat" name="imgPhat" type="hidden" value="<%= image.path%>" />
               <input id="userId" type="hidden" name="userId" value="<%= image._id%>" />
@@ -43,8 +59,7 @@
         </div>
       </div>
 
-      <%- include("partials/footerCss.ejs") %>
-        <script src="/js/formRezise.js"></script>
+      <script src="/js/formRezise.js"></script>
   </body>
 
   </html>

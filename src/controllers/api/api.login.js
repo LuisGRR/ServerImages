@@ -53,13 +53,26 @@ exports.register = async (req, res) => {
 }
 
 exports.logout = async (req, res) => {
-  req.session.destroy(function (err) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/")
-    }
-  });
+  try {
+    await new Promise((resolve, reject) => {
+      req.session.destroy((err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+    res.redirect("/");
+  } catch (err) {
+    console.error("Error destroying session: ", err);
+    res.status(500).json({
+      ok: false,
+      error: {
+        message: "Error al cerrar sesión. Inténtelo de nuevo."
+      }
+    });
+  }
 }
 
 exports.retrievePassword = (req, res) => {

@@ -6,8 +6,7 @@ async function metadataImage(image) {
     sharp(path.join(path.resolve(__dirname, '..'), "public", image))
       .metadata()
       .then((metadata) => {
-        console.log(metadata.height);
-        console.log(metadata.width);
+
         resolve([metadata.height, metadata.width]);
       })
       .catch((err) => {
@@ -15,6 +14,17 @@ async function metadataImage(image) {
         reject(err);
       });
   });
+}
+
+async function metadataMimetype(filePath) {
+  await sharp(filePath)
+    .metadata()
+    .then((metadata) => {
+      return metadata.format;
+    })
+    .catch((err) => {
+      console.log(`Error al obtener metadataImageHeight de la imagen: ${err}`);
+    });
 }
 
 function metadataImageHeight(image) {
@@ -39,13 +49,13 @@ function metadataImageWidth(image) {
     });
 }
 
-async function reziseImage(pahtImg, filename, width, height) {
+async function reziseImage(pahtImg, filename, width, height, typeResize) {
   return new Promise((resolve, reject) => {
     sharp(path.join(path.resolve(__dirname, '..'), 'public', pahtImg))
       .resize({
         width: parseInt(width),
         height: parseInt(height),
-        fit: sharp.fit.fill
+        fit: typeResize
       })
       .toFile(path.join(path.resolve(__dirname, '..'), "public/img/resize/") + filename)
       .then((result) => {
@@ -68,4 +78,5 @@ module.exports = {
   metadataImageHeight: metadataImageHeight,
   metadataImageWidth: metadataImageWidth,
   reziseImage: reziseImage,
+  metadataMimetype:metadataMimetype
 };

@@ -9,7 +9,6 @@ exports.deleteImage = async (req, res) => {
   try {
     const image = await Image.findByIdAndDelete(id);
     const filePath = path.resolve("./src/public" + image.path);
-    console.log("File path: "+filePath)
     await fs.promises.access(filePath, fs.constants.F_OK);
     await unlink(filePath);
     res.status(200).json({
@@ -18,14 +17,13 @@ exports.deleteImage = async (req, res) => {
   } catch (err) {
     // Manejar cualquier error que se haya producido durante la verificación o la eliminación del archivo
     let messageError;
-    if (error.code === 'ENOENT') {
-      messageError = `El archivo ${filePath} no existe.`;
-    } else if (error.code === 'EACCES') {
-      messageError = `No tienes permisos para acceder al archivo ${filePath}.`;
+    if (err.code === 'ENOENT') {
+      messageError = `El archivo ${filePath} no existe.`; 
+    } else if (err.code === 'EACCES') {
+      messageError = `No tienes permisos para acceder al archivo.`;
     } else {
-      messageError = `Se produjo un error al eliminar el archivo ${filePath}: ${error.message}`;
+      messageError = `Se produjo un error al eliminar el archivo: ${err.message}`;
     }
-    console.log(messageError);
     res.status(400).json({
       message: `El recurso no se ha sido eliminado : ${messageError}`,
     });

@@ -1,4 +1,5 @@
-const { metadataImage, reziseImage } = require("../utils/serviceSharp");
+const { metadataImage, reziseImage,metadataMimetype } = require("../utils/serviceSharp");
+const {convertImageFormat} = require("../utils/sharpConvert");
 const ImageRespository = require("../repositories/imagesRespository");
 
 const path = require("path");
@@ -49,7 +50,7 @@ exports.reziseImage = async (imageData) => {
     const imgName = uuidv4() + path.extname(imageInfo.path);
 
     const imageDetailsRezise = {
-        title: imageInfo.title + "- Resize",
+        title: imageInfo.title + " - Resize - "+imageData.typeResize,
         description: imageInfo.description,
         filename: imgName,
         path: `/img/resize/${imgName}`,
@@ -62,15 +63,55 @@ exports.reziseImage = async (imageData) => {
 
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
-      console.log(path.join(outputDir, imgName));
     }
 
-    await reziseImage(imageData.imgPhat, imgName, imageData.width, imageData.height);
+    await reziseImage(imageData.imgPhat, imgName, imageData.width, imageData.height,imageData.typeResize);
 
     imageDetailsRezise.height = imageData.height;
     imageDetailsRezise.width = imageData.width;
 
     imageDetailsRezise.size = fs.statSync(path.join(outputDir, imgName)).size;
+
+    ImageRespository.ImageSave(imageDetailsRezise);
+}
+
+exports.convertImage = async (imageData) => {
+    const dirBase = path.resolve(__dirname, '../');
+
+    const imageInfo = await ImageRespository.ImageFindId(imageData.id);
+
+    const imgName = uuidv4();
+
+    const imageDetailsRezise = {
+        title: imageInfo.title + " - convert - ",
+        description: imageInfo.description,
+        filename: imgName,
+        originalname: imageInfo.filename,
+        tags: imageInfo.tags
+    }
+
+    const outputDir = path.join(dirBase, "public/img/convert/");
+
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
+
+    const outputPath =  await convertImageFormat(imageData.imgPhat, imgName, imageData.typeConvert);
+
+    console.log("outputDir: "+outputDir);
+
+    console.log("outputPath: "+outputPath);
+
+    imageDetailsRezise.height = imageInfo.height;
+    imageDetailsRezise.width = imageInfo.width;
+
+    imageDetailsRezise.path= `/img/convert/${imgName}.${ imageData.typeConvert}`
+
+    const mimeType = await metadataMimetype(outputPath);
+ 
+    imageDetailsRezise.mimetype= `image/${mimeType}`;
+    
+    imageDetailsRezise.size = fs.statSync(outputPath).size;
 
     ImageRespository.ImageSave(imageDetailsRezise);
 }
