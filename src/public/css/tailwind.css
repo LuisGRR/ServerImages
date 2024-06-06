@@ -2921,9 +2921,9 @@ html {
 .grow {
   flex-grow: 1;
 }
-.columns-6 {
-  -moz-columns: 6;
-       columns: 6;
+.columns-2 {
+  -moz-columns: 2;
+       columns: 2;
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -3008,10 +3008,6 @@ html {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
-.bg-detailColor {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 248 234 / var(--tw-bg-opacity));
-}
 .bg-don-juan-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(89 69 69 / var(--tw-bg-opacity));
@@ -3023,9 +3019,6 @@ html {
 .bg-primaryColor {
   --tw-bg-opacity: 1;
   background-color: rgb(89 69 69 / var(--tw-bg-opacity));
-}
-.bg-opacity-25 {
-  --tw-bg-opacity: 0.25;
 }
 .p-1 {
   padding: 0.25rem;
@@ -3278,6 +3271,11 @@ html {
 
   .md\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .md\:columns-6 {
+    -moz-columns: 6;
+         columns: 6;
   }
 
   .md\:grid-cols-2 {

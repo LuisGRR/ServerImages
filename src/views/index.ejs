@@ -3,7 +3,7 @@
   <body>
     <%- include("partials/navbar.ejs") %>
       <main class="w-full h-full">
-        <section class="columns-6 px-5 gap-4">
+        <section class="columns-2 md:columns-6 px-5 gap-4">
           <% images.forEach(function(image){ %>
             <div class="card card-compact mb-5 bg-base-100 shadow-xl">
               <a href="/image/<%= image._id %>" class="rounded-xl overflow-hidden">
