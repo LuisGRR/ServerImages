@@ -1,12 +1,18 @@
 <form action="#" method="POST" class="w-1/2 rounded-lg shadow-xl p-5">
     <div class="flex flex-col gap-3 ">
+        <div class="flex flex-col gap-1">
+            <h2>Mime type</h2>
+            <div class="mt-5 whitespace-nowrap flex justify-around">
+                <p><%= image.mimetype %></p>
+            </div>
+        </div>
+        <div class="divider"></div>
         <div>
             <div class="label">
                 <span class="label-text">
                     Type </span>
             </div>
-            <select name="selectType" id="selectType"
-            class="select select-bordered w-full">
+            <select name="selectType" id="selectType" class="select select-bordered w-full">
                 <% if (mimetype !=='image/jpeg' ) { %>
                     <option value="jpeg">jpeg</option>
                     <% } %>
@@ -21,8 +27,7 @@
         <input id="imgPhat" name="imgPhat" type="hidden" value="<%= image.path%>" />
         <input id="userId" type="hidden" name="userId" value="<%= image._id%>" />
         <div>
-            <button type="submit"
-            class="btn btn-outline btn-block">
+            <button type="submit" class="btn btn-outline btn-block">
                 Convert
             </button>
         </div>
