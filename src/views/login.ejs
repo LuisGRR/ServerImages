@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,62 +8,50 @@
     <%- include("partials/headScripts.ejs") %>
   </head>
   <body>
-      <div class="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8 from-don-juan-900 via-don-juan-800 to-don-juan-500 bg-gradient-to-br">
+      <div class="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8">
       
       <% if (numUser > 1) { %>
-      <div class="bg-detailColor bg-opacity-25 w-full max-w-lg px-10 py-8 mx-auto rounded-lg shadow-2xl">
-        <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm flex flex-row justify-center">
-          <h2 class="text-detailColor text-3xl">Sing in</h2>
+      <div class="glass  w-full max-w-lg px-10 py-8 mx-auto rounded-lg shadow-2xl shadow-primaryColor">
+        <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm flex flex-row justify-center prose">
+          <h1 class="text-don-juan-800">Sing in</h1>
         </div>
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form id="loginForm" method="POST" class="space-y-6">
-              <div>
-                <label for="user" class="block text-sm font-medium leading-6 text-detailColor">User name</label>
-                <div class="mt-2">
-                  <input class="bg-don-juan-700 block w-full rounded-md border-0 py-1.5 text-secondaryColor shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6" 
-                    type="text" name="name" id="user" placeholder="User" required />
-                </div>
-              </div>
-              <div>
-                <label for="password" class="block text-sm font-medium leading-6 text-detailColor">Password</label>
-                <div class="mt-2">
-                  <input class="bg-don-juan-700 block w-full rounded-md border-0 py-1.5 text-secondaryColor shadow-sm ring-1 ring-inset ring-don-juan-800 placeholder:text-secondaryColor focus:ring-2 focus:ring-inset focus:ring-don-juan-600 sm:text-sm sm:leading-6"
-                    required type="password" name="password" id="password" placeholder="Password" />
-                </div>
-              </div>
-              <div>
-                <button type="submit" class="flex w-full justify-center rounded-md bg-don-juan-900 px-3 py-1.5 text-sm font-semibold leading-6 text-detailColor shadow-sm hover:bg-don-juan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-don-juan-600"> Login </button>
+              <label class="input input-bordered flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" /></svg>
+                <input type="text" class="grow" name="name" id="user" placeholder="User" required  />
+              </label>
+              <label class="input input-bordered flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path fill-rule="evenodd" d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z" clip-rule="evenodd" /></svg>
+                <input required class="grow" type="password" name="password" id="password" placeholder="Password"  />
+              </label>
+              <div>              
+                <button class="btn btn-block bg-don-juan-700">Login</button>
               </div>
             </form>
         </div>
       </div>
       <% }else{ %>
         <div class="bg-detailColor bg-opacity-25 w-full max-w-lg px-10 py-8 mx-auto rounded-lg shadow-2xl">
-          <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm flex flex-row justify-center">
-            <h2 class="text-detailColor text-3xl">Register</h2>
+          <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm flex flex-row justify-center prose">
+            <h1 class="text-detailColor">Register</h1>
           </div>
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form id="loginRegiste" method="POST" class="space-y-6">
+            <label class="input input-bordered flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" /></svg>
+              <input class="grow" type="text" name="user" placeholder="Name user" required  />
+            </label>
+            <label class="input input-bordered flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path fill-rule="evenodd" d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z" clip-rule="evenodd" /></svg>
+              <input class="grow" type="password" name="password-register" placeholder="passsword" required />
+            </label>
+            <label class="input input-bordered flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" /><path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" /></svg>
+              <input class="grow" type="email" name="email" placeholder="example@exmaple" required  />
+            </label>
               <div>
-                <label for="user" class="block text-sm font-medium leading-6 text-detailColor">User name</label>
-                <div class="mt-2"> 
-                  <input class="bg-don-juan-700 block w-full rounded-md border-0 py-1.5 text-secondaryColor shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6" type="text" name="user" placeholder="Name user" />
-                </div>
-              </div>
-              <div>
-                <label for="password-register" class="block text-sm font-medium leading-6 text-detailColor">Password</label>
-                <div class="mt-2">
-                  <input class="bg-don-juan-700 block w-full rounded-md border-0 py-1.5 text-secondaryColor shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6" type="text" name="password-register" placeholder="passsword" />
-                </div>
-              </div>
-              <div>
-                <label for="email" class="block text-sm font-medium leading-6 text-detailColor">Email</label>
-                <div class="mt-2">
-                  <input class="bg-don-juan-700 block w-full rounded-md border-0 py-1.5 text-secondaryColor shadow-sm ring-1 ring-inset ring-primaryColor placeholder:text-primaryColor focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6" type="email" name="email" placeholder="example@exmaple" required />
-                </div>
-              </div>
-              <div>
-                <button type="submit" class="flex w-full justify-center rounded-md bg-primaryColor px-3 py-1.5 text-sm font-semibold leading-6 text-detailColor shadow-sm hover:bg-secondaryColor focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primaryColor">Register</button>
+                <button type="submit" class="btn btn-block">Register</button>
               </div>
           </form>
         </div>
