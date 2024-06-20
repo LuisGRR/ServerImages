@@ -2,16 +2,16 @@ const Image = require("../models/image");
 
 class ImageRespository {
 
-    async ImageFind(){
+    async ImageFind() {
         try {
-            let images = await Image.find();
+            let images = await Image.find().sort({created_at:1}).exec();
             return images;
         } catch (err) {
             throw new Error("Error al momento de obtener las images");
         }
     }
-    
-    async ImageFindId(id){
+
+    async ImageFindId(id) {
         try {
             let images = await Image.findById(id);
             return images;
@@ -20,13 +20,28 @@ class ImageRespository {
         }
     }
 
-    async ImageSave(ImageModel){
+    async ImageSave(ImageModel) {
         try {
             const imge = new Image(ImageModel);
             await imge.save();
         } catch (error) {
-    
+
         }
+    }
+
+    /**
+     * Actualiza una imagen por su ID
+     * @param {string} imageId - El ID de la imagen a actualizar
+     * @param {Object} updateData - Los datos a actualizar
+     * @returns {Promise<Object>} - La imagen actualizada
+     */
+    async ImageEdit(id, data) {
+        data.update_at = Date.now(); // Actualizar el campo update_at
+        return await Image.updateOne({ _id: id }, data);
+    }
+
+    async ImageDelete(id) {
+        return await Image.findByIdAndDelete(id);
     }
 
 }

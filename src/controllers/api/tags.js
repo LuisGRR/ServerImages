@@ -1,8 +1,10 @@
-const TagsRepository = require('../../repositories/tagsRespository');
+//const TagsRepository = require('../../repositories/tagsRespository');
+const TagsServices = require("../../services/tagService.js");
 
 exports.tags = async (req, res) => {
   try {
-    const tags = await TagsRepository.TagsFind();
+    //const tags = await TagsRepository.TagsFind();
+    const tags = await TagsServices.tagFind();
     return res.status(200).json(tags);
   } catch (error) {
     return res.status(400).json({
@@ -17,20 +19,8 @@ exports.tags = async (req, res) => {
 exports.tagSave = async (req, res) => {
   try {
     const { tags } = req.body;
-
-    if (!Array.isArray(tags)) {
-      return res.status(400).json({
-        ok: false,
-        err: {
-          message: "Tags should be an array",
-        },
-      });
-    }
-    
-    for (let tagName of tags) {
-      await TagsRepository.TagSave(tagName);
-    }
-
+    //await TagsRepository.TagSave(tags);
+    await TagsServices.tagSave(tags)
     return res.status(200).json({
       message: "El recurso ha sido guardado exitosamente",
     });

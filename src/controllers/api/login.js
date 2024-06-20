@@ -1,9 +1,10 @@
-const UsuarioRepository = require("../../repositories/UserRespository");
+//const UsuarioRepository = require("../../repositories/UserRespository");
+const UserService = require("../../services/userService.js")
 const bcrypt = require("bcrypt");
 
 exports.login = async (req, res) => {
   let body = req.body;
-  let usuarioDB = await UsuarioRepository.UserFindOne(body.name);
+  let usuarioDB = await UserService.findUserName(body.name);
 
   if (!usuarioDB) {
     return res.status(400).json({
@@ -32,7 +33,8 @@ exports.login = async (req, res) => {
 
 exports.register = async (req, res) => {
   let body = req.body;
-  let numUsers = await UsuarioRepository.numUsers();
+  //let numUsers = await UsuarioRepository.numUsers();
+  let numUsers = await UserService.numberUsers();
   if (numUsers > 1) {
     return res.status(400).json({
       ok: false,
@@ -42,8 +44,8 @@ exports.register = async (req, res) => {
     });
   }
 
-  let user = await UsuarioRepository.SaveUser(body.name, body.password, body.email);
-
+  //  let user = await UsuarioRepository.SaveUser(body.name, body.password, body.email);
+  let user = await UserService.saveUser(body.name, body.password, body.email);
   req.session.userId = user._id;
 
   return res.status(200).json({
@@ -65,7 +67,7 @@ exports.logout = async (req, res) => {
     });
     res.redirect("/");
   } catch (err) {
-    console.error("Error destroying session: ", err);
+    //console.error("Error destroying session: ", err);
     res.status(500).json({
       ok: false,
       error: {
@@ -75,7 +77,7 @@ exports.logout = async (req, res) => {
   }
 }
 
-exports.retrievePassword = (req, res) => {
+/*exports.retrievePassword = (req, res) => {
   let body = req.body;
   UsuarioRepository.UserFindOneUserEmail(body.name, body.email);
-}
+}*/

@@ -17,14 +17,14 @@ async function metadataImage(image) {
 }
 
 async function metadataMimetype(filePath) {
-  await sharp(filePath)
-    .metadata()
-    .then((metadata) => {
-      return metadata.format;
-    })
-    .catch((err) => {
-      console.log(`Error al obtener metadataImageHeight de la imagen: ${err}`);
-    });
+  try {
+    const metadata = await sharp(filePath).metadata();
+    //console.log(metadata.format);
+    return metadata.format;
+  } catch (err) {
+    console.log(`Error al obtener metadataImageHeight de la imagen: ${err}`);
+    return undefined; // o lanza el error si prefieres: throw err;
+  }
 }
 
 function metadataImageHeight(image) {

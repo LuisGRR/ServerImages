@@ -7,6 +7,9 @@ const { format } = require("timeago.js");
 const donenv = require("dotenv");
 const session = require('express-session');
 
+const routes = require('./routers/index');
+
+
 //initial env
 donenv.config();
 
@@ -54,7 +57,7 @@ app.use((req, res, next) => {
 });
 
 //routers
-app.use(require("./routers/index"));
+app.use('/', routes);
 
 //static files
 app.use(express.static(path.join(__dirname, "public")));

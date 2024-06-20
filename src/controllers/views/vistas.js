@@ -32,7 +32,6 @@ exports.imageById = async (req, res) => {
   res.render("profile", { image });
 };
 
-//img manipulation controller
 exports.imageEdit = async (req, res) => {
   const { id } = req.params;
   const image = await Image.findIdImage(id);
@@ -42,5 +41,5 @@ exports.imageEdit = async (req, res) => {
 exports.imageManipulation = async (req, res) => {
   const { id,type } = req.params;
   const image = await Image.findIdImage(id);
-  res.render("monipulationImage", { image:image,type:type,mimetype: image.mimetype   });
+  res.render("monipulationImage", { image:image,type:type,mimetype: image.mimetype });
 };
