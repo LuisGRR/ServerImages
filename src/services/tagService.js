@@ -5,20 +5,12 @@ exports.tagFind = async () => {
 }
 
 exports.tagSave = async (tags) => {
-
-  if (!Array.isArray(tags)) {
-    throw new Error("Tags should be an array");
-  }
   try {
     for (let tagName of tags) {
       await TagRepository.TagSave(tagName);
     }
-
-    return { success: true, message: 'El recurso ha sido eliminado exitosamente' };
-
-
+    //return { success: true, message: 'El recurso ha sido eliminado exitosamente' };
   } catch (error) {
-    throw new Error("Error save tags");
-
+    throw new Error("Error save tags: ",error);
   }
 }

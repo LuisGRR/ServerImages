@@ -12,6 +12,6 @@ exports.numberUsers = async () => {
 
 exports.saveUser = async (name, password, email) => {
 
-  await UserRespository.SaveUser(name, password, email);
-
+  const saveUser = await UserRespository.SaveUser(name, password, email);
+return saveUser
 }

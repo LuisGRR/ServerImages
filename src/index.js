@@ -11,8 +11,9 @@ const routes = require('./routers/index');
 
 
 //initial env
-donenv.config();
+const env = process.env.NODE_ENV || 'development';
 
+donenv.config({ path: `.env.${env}` });
 //initializiones
 const app = express();
 require("./config/database");
@@ -27,7 +28,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, "public/img/uploads")||process.env.IMEGES_FOLDER,
+  destination: process.env.IMEGES_FOLDER || path.join(__dirname, "public/img/uploads"),
   filename: (req, file, cb) => {
     cb(null, uuidv4() + path.extname(file.originalname));
   },
@@ -35,7 +36,7 @@ const storage = multer.diskStorage({
 
 app.use(
   session({
-    secret:'tu secreto',//process.env.SECRET_KEY
+    secret: process.env.SECRET_KEY,
     resave:false,
     saveUninitialized:false
   })
@@ -63,6 +64,9 @@ app.use('/', routes);
 app.use(express.static(path.join(__dirname, "public")));
 
 // Start the server
-app.listen(app.get("port"), () => {
+const server = app.listen(app.get("port"), () => {
   console.log(`Server on port ${app.get("port")}`);
 });
+
+
+module.exports = {server,app}

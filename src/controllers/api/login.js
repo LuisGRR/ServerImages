@@ -4,13 +4,14 @@ const bcrypt = require("bcrypt");
 
 exports.login = async (req, res) => {
   let body = req.body;
+
   let usuarioDB = await UserService.findUserName(body.name);
 
   if (!usuarioDB) {
     return res.status(400).json({
       ok: false,
       err: {
-        message: "Usuario o contraseña incorrecto"
+        message: "El Usuario no existe"
       }
     });
   }
@@ -18,39 +19,49 @@ exports.login = async (req, res) => {
     return res.status(400).json({
       ok: false,
       err: {
-        message: "Usuario o contraseña incorrecto"
+        message: "Contraseña incorrecta"
       }
     });
   }
 
   req.session.userId = usuarioDB._id;
+  req.session.name = usuarioDB.name;
 
   res.status(200).json({
     ok: true,
-    user: usuarioDB
   });
 }
 
 exports.register = async (req, res) => {
   let body = req.body;
+  const maxUsers = parseInt(process.env.NUM_USERS_SYS, 10); // Convertir a número
+
   //let numUsers = await UsuarioRepository.numUsers();
   let numUsers = await UserService.numberUsers();
-  if (numUsers > 1) {
+  if (numUsers >= maxUsers) {
     return res.status(400).json({
       ok: false,
       err: {
-        message: "Ya existen mas ususarios de los configurados"
+        message: "Existen mas ususarios de los configurados"
       }
     });
   }
 
   //  let user = await UsuarioRepository.SaveUser(body.name, body.password, body.email);
   let user = await UserService.saveUser(body.name, body.password, body.email);
+  if (!user) {
+    return res.status(500).json({
+      ok: false,
+      err: {
+        message: "Error al crear el usuario"
+      }
+    });
+  }
   req.session.userId = user._id;
+  req.session.name = user.name;
 
-  return res.status(200).json({
+  return res.status(201).json({
     ok: true,
-    user
   });
 }
 
