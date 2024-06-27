@@ -8,6 +8,7 @@ src/public/img/convert
 
 ### dotenv ###
 .env
+.env.*
 
 ### Node ###
 # Logs
