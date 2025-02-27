@@ -1,0 +1,72 @@
+<%- include("partials/head.ejs") %>
+
+<body>
+  <%- include("partials/navbar.ejs") %>
+  <div class="h-full w-full">
+    <div class="flex flex-col items-center justify-center">
+      <div class="px-4 prose">
+        <div class="w-28 rounded-full">
+          <img
+            alt="Tailwind CSS Navbar component"
+            src="<%- dataUser.avatar || '/img/avatar/defaultAvatar.png' %>"
+          />
+        </div>
+        <h2 class="not-italic text-center font-normal leading-10">
+          <%- user %>
+        </h2>
+      </div>
+      <div class="w-6/12">
+        <div class="flex justify-center items-center">
+          <form
+            id="uploadForm"
+            enctype="multipart/form-data"
+            class="w-4/5 rounded-lg shadow-xl p-5"
+          >
+            <div class="flex flex-col gap-3 mb-6 md:grid-cols-2">
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="User name"
+                  id="User_name"
+                  placeholder="Type here"
+                  class="input input-bordered w-full"
+                  value="<%- dataUser.name %>"
+                />
+              </div>
+
+              <div>
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  id="User_name"
+                  placeholder="Type here"
+                  class="input input-bordered w-full"
+                  value="<%- dataUser.email %>"
+                />
+              </div>
+              <div>
+                <input
+                  type="file"
+                  name="avatar"
+                  accept="image/*"
+                  id="avatar"
+                  class="file-input file-input-bordered w-full"
+                />
+              </div>
+               <input type="hidden" name="userId" value="<%= dataUser._id%>" />
+              <div>
+                <button type="submit" id="submitButton" class="btn btn-block">
+                  Guardar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+      <script src="/js/formUpdatePerfil.js"></script>
+
+</body>
