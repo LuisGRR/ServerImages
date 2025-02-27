@@ -8,7 +8,7 @@ RUN npm install
 
 RUN chown root.root .
 
-#instalacion Shar reconstruccion para la plataforma correcta
+#instalacion Sharp reconstruccion para la plataforma correcta
 RUN npm install sharp
 RUN npm rebuild --arch=x64 --platform=linux --libc=musl sharp
 

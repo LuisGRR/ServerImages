@@ -11,7 +11,7 @@
   box-sizing: border-box; /* 1 */
   border-width: 0; /* 2 */
   border-style: solid; /* 2 */
-  border-color: currentColor; /* 2 */
+  border-color: #e5e7eb; /* 2 */
 }
 
 ::before,
@@ -1667,6 +1667,25 @@ html {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+.hero {
+  display: grid;
+  width: 100%;
+  place-items: center;
+  background-size: cover;
+  background-position: center;
+}
+.hero > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+.hero-overlay {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  height: 100%;
+  width: 100%;
+  background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity)));
+  --tw-bg-opacity: 0.5;
+}
 .input {
   flex-shrink: 1;
   -webkit-appearance: none;
@@ -2286,6 +2305,21 @@ html {
   outline: 2px solid currentColor;
   outline-offset: 2px;
 }
+.loading {
+  pointer-events: none;
+  display: inline-block;
+  aspect-ratio: 1 / 1;
+  width: 1.5rem;
+  background-color: currentColor;
+  -webkit-mask-size: 100%;
+          mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' stroke='%23000' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E.spinner_V8m1%7Btransform-origin:center;animation:spinner_zKoa 2s linear infinite%7D.spinner_V8m1 circle%7Bstroke-linecap:round;animation:spinner_YpZS 1.5s ease-out infinite%7D%40keyframes spinner_zKoa%7B100%25%7Btransform:rotate(360deg)%7D%7D%40keyframes spinner_YpZS%7B0%25%7Bstroke-dasharray:0 150;stroke-dashoffset:0%7D47.5%25%7Bstroke-dasharray:42 150;stroke-dashoffset:-16%7D95%25%2C100%25%7Bstroke-dasharray:42 150;stroke-dashoffset:-59%7D%7D%3C%2Fstyle%3E%3Cg class='spinner_V8m1'%3E%3Ccircle cx='12' cy='12' r='9.5' fill='none' stroke-width='3'%3E%3C%2Fcircle%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' stroke='%23000' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E.spinner_V8m1%7Btransform-origin:center;animation:spinner_zKoa 2s linear infinite%7D.spinner_V8m1 circle%7Bstroke-linecap:round;animation:spinner_YpZS 1.5s ease-out infinite%7D%40keyframes spinner_zKoa%7B100%25%7Btransform:rotate(360deg)%7D%7D%40keyframes spinner_YpZS%7B0%25%7Bstroke-dasharray:0 150;stroke-dashoffset:0%7D47.5%25%7Bstroke-dasharray:42 150;stroke-dashoffset:-16%7D95%25%2C100%25%7Bstroke-dasharray:42 150;stroke-dashoffset:-59%7D%7D%3C%2Fstyle%3E%3Cg class='spinner_V8m1'%3E%3Ccircle cx='12' cy='12' r='9.5' fill='none' stroke-width='3'%3E%3C%2Fcircle%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
 .mask-squircle {
   -webkit-mask-image: url("data:image/svg+xml,%3csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M100 0C20 0 0 20 0 100s20 100 100 100 100-20 100-100S180 0 100 0Z'/%3e%3c/svg%3e");
           mask-image: url("data:image/svg+xml,%3csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M100 0C20 0 0 20 0 100s20 100 100 100 100-20 100-100S180 0 100 0Z'/%3e%3c/svg%3e");
@@ -2685,6 +2719,17 @@ html {
   border-radius: 9999px;
   padding: 0px;
 }
+.divider-horizontal {
+  flex-direction: column;
+}
+.divider-horizontal:before {
+  height: 100%;
+  width: 0.125rem;
+}
+.divider-horizontal:after {
+  height: 100%;
+  width: 0.125rem;
+}
 .join.join-vertical {
   flex-direction: column;
 }
@@ -2765,6 +2810,14 @@ html {
 }
 .card-compact .card-title {
   margin-bottom: 0.25rem;
+}
+.divider-horizontal {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: auto;
+  width: 1rem;
 }
 .join.join-vertical > :where(*:not(:first-child)) {
   margin-left: 0px;
@@ -2873,6 +2926,9 @@ html {
 .h-5 {
   height: 1.25rem;
 }
+.h-52 {
+  height: 13rem;
+}
 .h-60 {
   height: 15rem;
 }
@@ -2897,6 +2953,12 @@ html {
 .w-14 {
   width: 3.5rem;
 }
+.w-28 {
+  width: 7rem;
+}
+.w-32 {
+  width: 8rem;
+}
 .w-4 {
   width: 1rem;
 }
@@ -2912,11 +2974,20 @@ html {
 .w-52 {
   width: 13rem;
 }
+.w-6\/12 {
+  width: 50%;
+}
 .w-full {
   width: 100%;
 }
+.max-w-full {
+  max-width: 100%;
+}
 .max-w-lg {
   max-width: 32rem;
+}
+.max-w-md {
+  max-width: 28rem;
 }
 .grow {
   flex-grow: 1;
@@ -2939,6 +3010,9 @@ html {
 }
 .items-center {
   align-items: center;
+}
+.justify-start {
+  justify-content: flex-start;
 }
 .justify-center {
   justify-content: center;
@@ -2964,6 +3038,9 @@ html {
 .gap-4 {
   gap: 1rem;
 }
+.gap-5 {
+  gap: 1.25rem;
+}
 .gap-y-2 {
   row-gap: 0.5rem;
 }
@@ -2974,6 +3051,9 @@ html {
 }
 .overflow-hidden {
   overflow: hidden;
+}
+.overflow-x-auto {
+  overflow-x: auto;
 }
 .truncate {
   overflow: hidden;
@@ -3004,21 +3084,19 @@ html {
 .border-0 {
   border-width: 0px;
 }
+.border-2 {
+  border-width: 2px;
+}
 .bg-base-100 {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
-.bg-don-juan-700 {
+.bg-white {
   --tw-bg-opacity: 1;
-  background-color: rgb(89 69 69 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
-.bg-don-juan-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(72 59 61 / var(--tw-bg-opacity));
-}
-.bg-primaryColor {
-  --tw-bg-opacity: 1;
-  background-color: rgb(89 69 69 / var(--tw-bg-opacity));
+.bg-opacity-60 {
+  --tw-bg-opacity: 0.6;
 }
 .p-1 {
   padding: 0.25rem;
@@ -3090,6 +3168,10 @@ html {
 .text-center {
   text-align: center;
 }
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -3101,6 +3183,9 @@ html {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+.font-bold {
+  font-weight: 700;
 }
 .font-medium {
   font-weight: 500;
@@ -3120,17 +3205,9 @@ html {
 .leading-6 {
   line-height: 1.5rem;
 }
-.text-detailColor {
+.text-neutral-content {
   --tw-text-opacity: 1;
-  color: rgb(255 248 234 / var(--tw-text-opacity));
-}
-.text-don-juan-800 {
-  --tw-text-opacity: 1;
-  color: rgb(82 65 66 / var(--tw-text-opacity));
-}
-.text-don-juan-900 {
-  --tw-text-opacity: 1;
-  color: rgb(72 59 61 / var(--tw-text-opacity));
+  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
 }
 .opacity-70 {
   opacity: 0.7;
@@ -3160,10 +3237,6 @@ html {
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
-.shadow-primaryColor {
-  --tw-shadow-color: #594545;
-  --tw-shadow: var(--tw-shadow-colored);
-}
 .ring-1 {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -3172,32 +3245,12 @@ html {
 .ring-inset {
   --tw-ring-inset: inset;
 }
-.ring-primaryColor {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(89 69 69 / var(--tw-ring-opacity));
-}
 .transition {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-}
-.placeholder\:text-primaryColor::-moz-placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(89 69 69 / var(--tw-text-opacity));
-}
-.placeholder\:text-primaryColor::placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(89 69 69 / var(--tw-text-opacity));
-}
-.hover\:bg-don-juan-600:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 91 89 / var(--tw-bg-opacity));
-}
-.focus\:border-don-juan-900:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(72 59 61 / var(--tw-border-opacity));
 }
 .focus\:ring-2:focus {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
@@ -3207,14 +3260,6 @@ html {
 .focus\:ring-inset:focus {
   --tw-ring-inset: inset;
 }
-.focus\:ring-don-juan-500:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(137 110 105 / var(--tw-ring-opacity));
-}
-.focus\:ring-secondaryColor:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(129 91 91 / var(--tw-ring-opacity));
-}
 .focus-visible\:outline:focus-visible {
   outline-style: solid;
 }
@@ -3223,9 +3268,6 @@ html {
 }
 .focus-visible\:outline-offset-2:focus-visible {
   outline-offset: 2px;
-}
-.focus-visible\:outline-don-juan-600:focus-visible {
-  outline-color: #755b59;
 }
 @media (min-width: 640px) {
 
