@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Server image login</title>
+    <%- include("../partials/headScripts.ejs") %>
+  </head>
+  <body>
+    <div class="hero flex flex-col min-h-full h-screen justify-center">
+      <div class="navbar bg-base-100">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabindex="0"
+              class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Registro</a></li>
+            </ul>
+          </div>
+          <a class="btn btn-ghost text-xl" href="/home">Pendragon Gallery</a>
+        </div>
+
+        <div class="navbar-end hidden lg:flex">
+          <ul class="menu menu-horizontal px-1">
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Registro</a></li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="hero h-full"
+        style="
+          background-image: url('/img/inter/challenger-stands-front-spooky-castle-illustration.jpg');
+        "
+      >
+        <div class="hero-overlay bg-opacity-60"></div>
+
+        <div class="fhero-content text-neutral-content text-center">
+          <div class="max-w-md">
+            <h1 class="mb-5 text-5xl font-bold">Welcome</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

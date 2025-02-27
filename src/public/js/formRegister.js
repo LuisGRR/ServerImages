@@ -4,10 +4,13 @@ document.getElementById("loginRegiste").addEventListener("submit",function(event
   
   const password = document.querySelector('input[name="password-register"]');
   const user = document.querySelector('input[name="user"]');
+  const email = document.querySelector('input[name="email"]');
+
   
   const formData = {
     name: user.value,
-    password: password.value
+    password: password.value,
+    email: email.value
   }
 
   fetch(url,{

@@ -20,14 +20,15 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
   })
     .then((response) => {
       if (!response.ok) {
+        console.log(response)
         throw new Error("Network response was not ok");
       }
       return response.json();
     })
-    .then(() => {console.log
+    .then(() => {
       window.location.replace("/home");
     })
     .catch((error) => {
-      //console.log(error);
+      console.log(error);
     });
 });

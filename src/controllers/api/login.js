@@ -26,6 +26,7 @@ exports.login = async (req, res) => {
 
   req.session.userId = usuarioDB._id;
   req.session.name = usuarioDB.name;
+  req.session.avatar = usuarioDB.avatar;
 
   res.status(200).json({
     ok: true,
@@ -59,6 +60,7 @@ exports.register = async (req, res) => {
   }
   req.session.userId = user._id;
   req.session.name = user.name;
+  req.session.avatar = user.avatar;
 
   return res.status(201).json({
     ok: true,
