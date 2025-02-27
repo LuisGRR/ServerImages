@@ -8,6 +8,8 @@ const session = require("express-session");
 
 const routes = require("./routers/index");
 
+const checkImagesRegister = require("./utils/checkImagesRegister");
+
 //initial env
 const env = process.env.NODE_ENV || "development";
 
@@ -55,6 +57,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Start the server
 const server = app.listen(app.get("port"), () => {
   console.log(`Server on port ${app.get("port")}`);
+  checkImagesRegister.registerUnregisteredImages();
 });
 
 module.exports = { server, app };
