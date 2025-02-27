@@ -1,5 +1,6 @@
 const { metadataImage, reziseImage, metadataMimetype } = require("../utils/serviceSharp");
 const { convertImageFormat } = require("../utils/sharpConvert");
+const {generateImageHash} = require("../utils/hashImages")
 const ImageRespository = require("../repositories/imagesRespository");
 
 const path = require("path");
@@ -34,13 +35,18 @@ exports.saveImage = async (imageData, file) => {
     } else {
       tagsImage = imageData.tagsImage;
     }
+
+    imageDetails.hash = await generateImageHash(imageDetails.path);
+
     imageDetails.tags = tagsImage ? JSON.parse(tagsImage) : [];
 
     const [height, width] = await metadataImage(imageDetails.path);
     imageDetails.height = height;
     imageDetails.width = width;
 
-    ImageRespository.ImageSave(imageDetails);
+    const image = await ImageRespository.ImageSave(imageDetails);
+
+    return image;
   } catch (error) {
     throw new Error('Error en el servicio al guardar la imagen: ' + error.message);
   }

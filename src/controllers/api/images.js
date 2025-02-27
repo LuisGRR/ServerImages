@@ -1,8 +1,10 @@
 const ImageService = require("../../services/imageService")
+const DuplicateImageService = require("../../services/duplicateImageService");
 
 exports.uploadImage = async (req, res) => {
     try {
-        ImageService.saveImage(req.body, req.file)
+        const imageData = await ImageService.saveImage(req.body, req.file);
+        DuplicateImageService.saveImage(imageData);
         res.redirect("/home");
     } catch (err) {
         //console.log(`Error al obtener metadata de la imagen: ${err}`);

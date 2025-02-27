@@ -23,7 +23,7 @@ class ImageRespository {
     async ImageSave(ImageModel) {
         try {
             const imge = new Image(ImageModel);
-            await imge.save();
+            return await imge.save();
         } catch (error) {
 
         }

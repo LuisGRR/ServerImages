@@ -7,7 +7,7 @@
           <% images.forEach(function(image){ %>
             <div class="card card-compact mb-5 bg-base-100 shadow-xl">
               <a href="/image/<%= image._id %>" class="rounded-xl overflow-hidden">
-                <img src="<%= image.path %>" alt="<%=image.title %>" />
+                <img src="<%= image.path %>" alt="<%=image.title %>" loading="lazy"/>
               </a>
             </div>
             <% }); %>

@@ -1,20 +1,35 @@
 <div class="navbar bg-base-100">
-
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          />
         </svg>
       </div>
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+      >
         <li><a href="/home">Home</a></li>
         <li><a href="/upload">Upload</a></li>
         <li><a href="/resizes">Resizes</a></li>
-        <li><a href="/logout">Logout</a></li>
+        <li><a href="/duplicate-images">Duplicate</a></li>
+
+        <!--li><a href="/logout">Logout</a></li-->
       </ul>
     </div>
-    <a class="btn btn-ghost text-xl" href="/home">ImageServer</a>
+    <a class="btn btn-ghost text-xl" href="/home">Pendragon Gallery</a>
   </div>
 
   <div class="navbar-center hidden lg:flex">
@@ -22,29 +37,32 @@
       <li><a href="/home">Home</a></li>
       <li><a href="/upload">Upload</a></li>
       <li><a href="/resizes">Resizes</a></li>
-      <li><a href="/logout">Logout</a></li>
+      <li><a href="/duplicate-images">Duplicate</a></li>
+
+      <!--li><a href="/logout">Logout</a></li-->
     </ul>
   </div>
 
-  <!--div class="navbar-end">
-
+  <div class="navbar-end">
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <img alt="Tailwind CSS Navbar component"
-            src="/img/avatar/defaultAvatar.png" />
+          <img
+            alt="Tailwind CSS Navbar component"
+            src="/img/avatar/defaultAvatar.png"
+          />
         </div>
       </div>
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+      >
         <li>
-          <a class="justify-between">
-            Profile
-          </a>
+          <a href="/perfile" class="justify-between"> Profile </a>
         </li>
         <li><a>Settings</a></li>
         <li><a href="/logout">Logout</a></li>
       </ul>
     </div>
-  </div-->
-
+  </div>
 </div>

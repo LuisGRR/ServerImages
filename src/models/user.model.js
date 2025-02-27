@@ -14,6 +14,7 @@ const userSchema = new Schema({
     require: true,
     minlength:8
   },
+  avatar: { type: String },
   email: {
     type: String,
     required: true,
