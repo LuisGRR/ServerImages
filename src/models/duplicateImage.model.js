@@ -4,7 +4,6 @@ const duplicateImageSchema = new Schema({
   title: { type: String, required: true }, // Nombre original de la imagen
   hash: { type: String, required: true, unique: true }, // Hash de la imagen
   path: { type: String, required: true },
-  path: { type: String, required: true },
   imagen_id: { type: Schema.Types.ObjectId, ref: "Image", require: true },
   images_duplicate: [
     {

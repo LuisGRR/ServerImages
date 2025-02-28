@@ -27,6 +27,7 @@ exports.updateImage = async (req, res) => {
 exports.deleteImage = async (req, res) => {
   try {
     const result = await ImageService.deleteImage(req.params.id);
+    await DuplicateImageService.deleteImageDuplicate(req.params.id);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ ok: false, message: error.message });

@@ -1,5 +1,7 @@
 const Image = require("../../services/imageService");
 
+//const ImageDuplicate = require("../../services/duplicateImageService");
+
 exports.images = async (req, res) => {
   try {
     const images = await Image.findImage();
@@ -40,4 +42,9 @@ exports.imagesAggregate = async (req, res) => {
       message: "Error al obtner las imagenes ",
     });
   }
+};
+
+exports.imageDuplciate = async (req, res) => {
+  const date = 1; //=await ImageDuplicate.deleteImageDuplicate(req.params.id);
+  res.status(200).json(date);
 };

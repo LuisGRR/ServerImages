@@ -6,7 +6,7 @@
         <section class="flex flex-col justify-start px-5 gap-5 w-full">
           <% images.forEach(function(image){ %>
             <div class="flex h-52 gap-5 overflow-x-auto ">
-              <a href="/image/<%= image.imagen_id %>" class="card w-32 mb-5 image-full bg-base-100  flex items-center justify-center border-2">
+              <a href="/image/<%= image.imagen_id %>" class="card w-32 mb-5 image-full bg-base-100  flex items-center justify-center overflow-hidden">
                 <figure>
                   <img src="<%= image.path %>" alt="<%=image.title %>" class="h-full max-w-full"/>
                 </figure>
@@ -14,7 +14,7 @@
                 <div class="divider divider-horizontal"></div>
 
               <% image.images_duplicate.forEach(function(data){ %>
-                <a href="/image/<%= data.imagen_id %>" class="card w-32 image-full mb-5 bg-base-100  flex items-center justify-center">
+                <a href="/image/<%= data.imagen_id %>" class="card w-32 image-full mb-5 bg-base-100  flex items-center justify-center overflow-hidden">
                   <figure>
                     <img src="<%= data.path %>" alt="<%=data.title %>" class="h-full max-w-full"/>
                   </figure>
