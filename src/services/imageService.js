@@ -17,6 +17,14 @@ exports.findImage = async () => {
   return await ImageRespository.ImageFind();
 };
 
+exports.findImage = async () => {
+  return await ImageRespository.ImageFind();
+};
+
+exports.imageAggregateCreateAt = async () => {
+  return await ImageRespository.imageAggregateCreateAt();
+};
+
 exports.findIdImage = async (id) => {
   return await ImageRespository.ImageFindId(id);
 };

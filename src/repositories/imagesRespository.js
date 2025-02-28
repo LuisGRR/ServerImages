@@ -10,6 +10,22 @@ class ImageRespository {
     }
   }
 
+  async imageAggregateCreateAt() {
+    let imagesAgregate = await Image.aggregate([
+      {
+        $group: {
+          _id: {
+            year: { $year: "$created_at" },
+            month: { $month: "$created_at" },
+          },
+          images: { $push: "$$ROOT" }, // Agrupa las imágenes en un array
+        },
+      },
+      { $sort: { "_id.year": -1, "_id.month": -1 } }, // Ordena por año y mes
+    ]);
+    return imagesAgregate;
+  }
+
   async ImageFindId(id) {
     try {
       let images = await Image.findById(id);

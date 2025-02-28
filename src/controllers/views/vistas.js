@@ -6,8 +6,28 @@ exports.index = async (req, res) => {
   try {
     let avatar = req.session.avatar;
 
-    const images = await Image.findImage();
-    res.render("index", { images, avatar });
+    const images = await Image.imageAggregateCreateAt();
+
+    const groupedImages = images.reduce((acc, curr) => {
+      const year = curr._id.year;
+      const month = curr._id.month;
+
+      // Si el año no existe en el acumulador, lo inicializamos
+      if (!acc[year]) {
+        acc[year] = {};
+      }
+
+      // Si el mes no existe en el año, lo inicializamos
+      if (!acc[year][month]) {
+        acc[year][month] = [];
+      }
+
+      // Agregar las imágenes al mes correspondiente
+      acc[year][month] = acc[year][month].concat(curr.images);
+      return acc;
+    }, {});
+
+    res.render("index", { groupedImages, avatar });
   } catch (error) {
     res.status(500).send("error interno del servidor");
   }
