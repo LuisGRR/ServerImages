@@ -10,6 +10,9 @@ const routes = require("./routers/index");
 
 const checkImagesRegister = require("./utils/checkImagesRegister");
 
+//Wacthers
+const imageWatcher = require("./watchers/imageWatcher");
+
 //initial env
 const env = process.env.NODE_ENV || "development";
 
@@ -28,7 +31,6 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-
 app.use(
   session({
     secret: process.env.SECRET_KEY,
@@ -36,8 +38,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-
-
 
 // => Here we expose your dist folder
 app.use(express.static(path.join(__dirname, "public")));

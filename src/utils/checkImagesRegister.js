@@ -17,6 +17,11 @@ async function registerUnregisteredImages() {
 
     const registeredFilenames = registeredImages.map((image) => image.filename);
 
+    const registeredId = registeredImages.map((image) => ({
+      filename: image.filename,
+      id: image._id, // Asegúrate de que el campo del ID sea correcto
+    }));
+
     for (const filename of imageFiles) {
       if (!registeredFilenames.includes(filename)) {
         const imageMetadata = await sharp(
@@ -42,6 +47,30 @@ async function registerUnregisteredImages() {
       }
     }
     console.log(`Se agregaron en total  "${cantiada}"`);
+
+    const missingImages = registeredId.filter(
+      ({ filename }) => !imageFiles.includes(filename)
+    );
+
+    if (missingImages.length > 0) {
+      console.log(
+        "Los siguientes registros no tienen archivos en la carpeta:",
+        missingImages
+      );
+
+      // Iterar sobre los registros faltantes y eliminar cada uno
+      for (const missingImage of missingImages) {
+        const { id } = missingImage;
+
+        // Llamar a las funciones de eliminación
+        await Image.deleteRegistImage(id); // Eliminar la imagen
+        await DuplicateImageService.deleteImageDuplicate(id); // Eliminar la imagen duplicada
+      }
+    } else {
+      console.log(
+        "Todos los registros tienen archivos correspondientes en la carpeta."
+      );
+    }
   } catch (error) {
     console.error("Error al registrar las imágenes:", error);
   }

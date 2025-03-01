@@ -227,3 +227,14 @@ exports.deleteImage = async (id) => {
     throw new Error(`El recurso no se ha sido eliminado : ${messageError}`);
   }
 };
+
+
+exports.deleteRegistImage = async (id) => {
+  try {
+    await ImageRespository.ImageDelete(id);
+  } catch (error) {
+    throw new Error(
+      "Error en el servicio de actualización de imagen: " + error.message
+    );
+  }
+};
