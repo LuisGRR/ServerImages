@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/node,dotenv
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,dotenv
-src/public/img/*
+src/public/img/avatar
+src/public/img/convert
+src/public/img/rezise
+src/public/img/uploads
 
 
 ### dotenv ###

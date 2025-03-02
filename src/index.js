@@ -5,6 +5,7 @@ require("dotenv").config({
 const express = require("express");
 const path = require("path");
 const morgan = require("morgan");
+const MongoStore = require("connect-mongo");
 
 const { format } = require("timeago.js");
 //const donenv = require("dotenv");
@@ -13,12 +14,7 @@ const session = require("express-session");
 const routes = require("./routers/index");
 const checkImagesRegister = require("./utils/checkImagesRegister");
 
- require("./watchers/imageWatcher");
-
-//initial env
-//const env = process.env.NODE_ENV || "development";
-
-//donenv.config({ path: `.env.${env}` });
+require("./watchers/imageWatcher");
 
 const { IMAGE_UPLOADS_PATH } = require("./config/config");
 
@@ -41,6 +37,7 @@ app.use(
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DB_CONNECTION_URL }),
   })
 );
 
@@ -65,7 +62,6 @@ const server = app.listen(app.get("port"), () => {
   console.log(`Carpeta de al macenamiento de imagenes ${IMAGE_UPLOADS_PATH}`);
 
   checkImagesRegister.registerUnregisteredImages();
-
 });
 
 module.exports = { server, app };
