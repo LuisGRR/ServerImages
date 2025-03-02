@@ -2,13 +2,14 @@ const chokidar = require("chokidar");
 const path = require("path");
 const sharp = require("sharp");
 
+const { IMAGE_UPLOADS_PATH } = require("../config/config");
+const processedFiles = require("../utils/processedFiles");
+
 const Image = require("../services/imageService");
 const DuplicateImageService = require("../services/duplicateImageService");
 
-const registeredFilenames = new Set(); // Usar un conjunto para almacenar nombres de archivos registrados
-
 // Ruta de la carpeta donde se almacenan las imágenes
-const imagesDirectory = path.join(__dirname, "../public/img/uploads");
+const imagesDirectory = IMAGE_UPLOADS_PATH;
 
 // Configurar Chokidar para observar la carpeta
 const watcher = chokidar.watch(imagesDirectory, {
@@ -20,12 +21,27 @@ const watcher = chokidar.watch(imagesDirectory, {
 watcher.on("add", async (filePath) => {
   const fileName = path.basename(filePath); // Obtener el nombre del archivo
 
+  console.log("chokidar.watch: " +fileName);
+  // Verificar si el archivo ya fue procesado por Multer
+  if (processedFiles.hasFile(fileName)) {
+    console.log(
+      `El archivo "${fileName}" fue procesado por Multer. Ignorando...`
+    );
+    processedFiles.removeFile(fileName); // Eliminarlo del conjunto después de ignorarlo
+    return;
+  }
+
+  const registeredImages = await Image.findImageFileName();
+  const imageExists = registeredImages.find(
+    (image) => image.filename === fileName
+  );
+
   // Verificar si el archivo ya ha sido registrado
-  if (!registeredFilenames.has(fileName)) {
-    registeredFilenames.add(fileName); // Agregar el nombre del archivo al conjunto
+  if (!imageExists) {
+    // registeredFilenames.add(fileName); // Agregar el nombre del archivo al conjunto
     try {
       const imageMetadata = await sharp(
-        path.join(__dirname, "../public/img/uploads", fileName)
+        path.join(IMAGE_UPLOADS_PATH, fileName)
       ).metadata();
 
       const imageData = {
@@ -42,7 +58,9 @@ watcher.on("add", async (filePath) => {
 
       const imageResult = await Image.saveImage(imageData, metaData);
       await DuplicateImageService.saveImage(imageResult);
-      console.log(`Imagen agregada "${fileName}" se registro en la base de datos.`);
+      console.log(
+        `Imagen agregada "${fileName}" se registro en la base de datos.`
+      );
     } catch (err) {
       if (err.code === 11000) {
         // Código de error para duplicados
@@ -63,7 +81,7 @@ watcher.on("add", async (filePath) => {
 // Evento cuando se elimina un archivo
 watcher.on("unlink", async (filePath) => {
   const fileName = path.basename(filePath); // Obtener el nombre del archivo
-  console.log(`Imagen eliminada: ${fileName} (${filePath})`);
+  //console.log(`Imagen eliminada: ${fileName} (${filePath})`);
   try {
     // Aquí puedes agregar la lógica para manejar la eliminación de la imagen
     const registeredImages = await Image.findImageFileName();
@@ -81,10 +99,6 @@ watcher.on("unlink", async (filePath) => {
       await DuplicateImageService.deleteImageDuplicate(id); // Eliminar la imagen duplicada
 
       console.log(`Registro eliminado de la base de datos: ${fileName}`);
-    } else {
-      console.log(
-        `No se encontró el registro para la imagen eliminada: ${fileName}`
-      );
     }
   } catch (err) {
     console.error(`Error al guardar la imagen: ${err.message}`);

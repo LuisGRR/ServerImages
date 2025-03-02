@@ -1,3 +1,8 @@
+const fs = require("fs");
+const path = require("path");
+
+const { IMAGE_UPLOADS_PATH } = require("../../config/config");
+
 const Image = require("../../services/imageService");
 
 //const ImageDuplicate = require("../../services/duplicateImageService");
@@ -6,6 +11,29 @@ exports.images = async (req, res) => {
   try {
     const images = await Image.findImage();
     res.status(200).json(images);
+  } catch (error) {
+    res.status(400).json({
+      message: "Error al obtner las imagenes ",
+    });
+  }
+};
+
+exports.imageLoad = async (req, res) => {
+  try {
+    const filename = req.params.filename;
+    console.log(filename);
+    const imagePath = path.join(IMAGE_UPLOADS_PATH, filename);
+    console.log(imagePath);
+
+    fs.access(imagePath, fs.constants.F_OK, (err) => {
+      if (err) {
+        return res.status(404).send("Imagen no encontrada");
+      }
+
+      // Configurar encabezados de caché
+      res.setHeader("Cache-Control", "public, max-age=31536000"); // 1 año
+      res.sendFile(imagePath);
+    });
   } catch (error) {
     res.status(400).json({
       message: "Error al obtner las imagenes ",

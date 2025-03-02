@@ -11,6 +11,7 @@ const imageSchema = new Schema({
   width: { type: String },
   size: { type: Number },
   hash: { type: String },
+  histogram: [Number],
   tags: {
     type: [String],
     default: [],

@@ -1,22 +1,27 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV || "development"}`,
+}); // Cargar el archivo .env correcto
+
 const express = require("express");
 const path = require("path");
 const morgan = require("morgan");
 
 const { format } = require("timeago.js");
-const donenv = require("dotenv");
+//const donenv = require("dotenv");
 const session = require("express-session");
 
 const routes = require("./routers/index");
-
 const checkImagesRegister = require("./utils/checkImagesRegister");
 
-//Wacthers
-const imageWatcher = require("./watchers/imageWatcher");
+ require("./watchers/imageWatcher");
 
 //initial env
-const env = process.env.NODE_ENV || "development";
+//const env = process.env.NODE_ENV || "development";
 
-donenv.config({ path: `.env.${env}` });
+//donenv.config({ path: `.env.${env}` });
+
+const { IMAGE_UPLOADS_PATH } = require("./config/config");
+
 //initializiones
 const app = express();
 require("./config/database");
@@ -57,7 +62,10 @@ app.use(express.static(path.join(__dirname, "public")));
 // Start the server
 const server = app.listen(app.get("port"), () => {
   console.log(`Server on port ${app.get("port")}`);
+  console.log(`Carpeta de al macenamiento de imagenes ${IMAGE_UPLOADS_PATH}`);
+
   checkImagesRegister.registerUnregisteredImages();
+
 });
 
 module.exports = { server, app };

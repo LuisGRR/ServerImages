@@ -3,13 +3,16 @@ const { Schema, model } = require("mongoose");
 const duplicateImageSchema = new Schema({
   title: { type: String, required: true }, // Nombre original de la imagen
   hash: { type: String, required: true, unique: true }, // Hash de la imagen
+  histogram: [Number],
   path: { type: String, required: true },
+  filename: { type: String },
   imagen_id: { type: Schema.Types.ObjectId, ref: "Image", require: true },
   images_duplicate: [
     {
       // Array para almacenar nombres y rutas de imágenes duplicadas
       title: String,
       path: String,
+      filename: { type: String },
       imagen_id: { type: Schema.Types.ObjectId, ref: "Image", require: true },
     },
   ],

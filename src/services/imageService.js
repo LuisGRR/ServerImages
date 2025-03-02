@@ -4,7 +4,9 @@ const {
   metadataMimetype,
 } = require("../utils/serviceSharp");
 const { convertImageFormat } = require("../utils/sharpConvert");
+const { getHistogram } = require("../utils/histogramaImages");
 const { generateImageHash } = require("../utils/hashImages");
+
 const ImageRespository = require("../repositories/imagesRespository");
 
 const path = require("path");
@@ -12,6 +14,8 @@ const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const { unlink } = require("fs-extra");
 const mongoose = require("mongoose");
+
+const { IMAGE_UPLOADS_PATH } = require("../config/config");
 
 exports.findImage = async () => {
   return await ImageRespository.ImageFind();
@@ -39,7 +43,7 @@ exports.saveImage = async (imageData, file) => {
       title: imageData.title,
       description: imageData.description,
       filename: file.filename,
-      path: `/img/uploads/${file.filename}`,
+      path: path.join(IMAGE_UPLOADS_PATH, file.filename),
       originalname: file.originalname,
       mimetype: file.mimetype,
       size: file.size,
@@ -56,13 +60,16 @@ exports.saveImage = async (imageData, file) => {
     }
 
     imageDetails.hash = await generateImageHash(imageDetails.path);
+    imageDetails.histogram = await getHistogram(imageDetails.path);
 
     imageDetails.tags = tagsImage ? JSON.parse(tagsImage) : [];
 
     const [height, width] = await metadataImage(imageDetails.path);
     imageDetails.height = height;
     imageDetails.width = width;
-
+    console.log(
+      `Imagen "${imageDetails.path}" se esta registrando en la base de datos.`
+    );
     const image = await ImageRespository.ImageSave(imageDetails);
 
     return image;
@@ -74,27 +81,19 @@ exports.saveImage = async (imageData, file) => {
 };
 
 exports.reziseImage = async (imageData) => {
-  const dirBase = path.resolve(__dirname, "../");
-
   const imageInfo = await ImageRespository.ImageFindId(imageData.id);
 
   const imgName = uuidv4() + path.extname(imageInfo.path);
-
+  //path.join(IMAGE_UPLOADS_PATH, file.filename)
   const imageDetailsRezise = {
     title: imageInfo.title + " - Resize - " + imageData.typeResize,
     description: imageInfo.description,
     filename: imgName,
-    path: `/img/resize/${imgName}`,
+    path: path.join(IMAGE_UPLOADS_PATH, imgName),
     originalname: imageInfo.filename,
     mimetype: imageInfo.mimetype,
     tags: imageInfo.tags,
   };
-
-  const outputDir = path.join(dirBase, "public/img/resize/");
-
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
-  }
 
   await reziseImage(
     imageData.imgPhat,
@@ -107,50 +106,55 @@ exports.reziseImage = async (imageData) => {
   imageDetailsRezise.height = imageData.height;
   imageDetailsRezise.width = imageData.width;
 
-  imageDetailsRezise.size = fs.statSync(path.join(outputDir, imgName)).size;
+  imageDetailsRezise.size = fs.statSync(
+    path.join(IMAGE_UPLOADS_PATH, imgName)
+  ).size;
 
-  ImageRespository.ImageSave(imageDetailsRezise);
+  imageDetailsRezise.hash = await generateImageHash(imageDetailsRezise.path);
+  imageDetailsRezise.histogram = await getHistogram(imageDetailsRezise.path);
+
+  return await ImageRespository.ImageSave(imageDetailsRezise);
 };
 
 exports.convertImage = async (imageData) => {
-  const dirBase = path.resolve(__dirname, "../");
+  try {
+    const imageInfo = await ImageRespository.ImageFindId(imageData.id);
 
-  const imageInfo = await ImageRespository.ImageFindId(imageData.id);
+    const imgName = uuidv4();
 
-  const imgName = uuidv4();
+    const imageDetailsRezise = {
+      title: imageInfo.title + " - convert - ",
+      description: imageInfo.description,
+      filename: imgName + "." + imageData.typeConvert,
+      originalname: imageInfo.filename,
+      tags: imageInfo.tags,
+    };
 
-  const imageDetailsRezise = {
-    title: imageInfo.title + " - convert - ",
-    description: imageInfo.description,
-    filename: imgName,
-    originalname: imageInfo.filename,
-    tags: imageInfo.tags,
-  };
+    const outputPath = await convertImageFormat(
+      imageData.imgPhat,
+      imgName,
+      imageData.typeConvert
+    );
 
-  const outputDir = path.join(dirBase, "public/img/convert/");
+    imageDetailsRezise.height = imageInfo.height;
+    imageDetailsRezise.width = imageInfo.width;
+    imageDetailsRezise.path = `${IMAGE_UPLOADS_PATH}/${imgName}.${imageData.typeConvert}`;
 
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+    const mimeType = await metadataMimetype(outputPath);
+
+    imageDetailsRezise.mimetype = `image/${mimeType}`;
+
+    imageDetailsRezise.size = fs.statSync(outputPath).size;
+
+    imageDetailsRezise.hash = await generateImageHash(outputPath);
+    imageDetailsRezise.histogram = await getHistogram(outputPath);
+
+    return await ImageRespository.ImageSave(imageDetailsRezise);
+  } catch (error) {
+    throw new Error(
+      "Error en el servicio de actualización de imagen: " + error.message
+    );
   }
-
-  const outputPath = await convertImageFormat(
-    imageData.imgPhat,
-    imgName,
-    imageData.typeConvert
-  );
-
-  imageDetailsRezise.height = imageInfo.height;
-  imageDetailsRezise.width = imageInfo.width;
-
-  imageDetailsRezise.path = `/img/convert/${imgName}.${imageData.typeConvert}`;
-
-  const mimeType = await metadataMimetype(outputPath);
-
-  imageDetailsRezise.mimetype = `image/${mimeType}`;
-
-  imageDetailsRezise.size = fs.statSync(outputPath).size;
-
-  ImageRespository.ImageSave(imageDetailsRezise);
 };
 
 /**
@@ -199,15 +203,10 @@ exports.deleteImage = async (id) => {
       throw new Error("Error al obtener el path de la imagen eliminada.");
     }
 
-    const filePath = path.resolve("./src/public" + deleteResult.path);
+    //const filePath = path.resolve("./src/public" + deleteResult.path);
 
-    if (!fs.existsSync(filePath)) {
-      //console.log('File path does not exist, creating directory...');
-      fs.mkdirSync(filePath, { recursive: true });
-    }
-
-    await fs.promises.access(filePath, fs.constants.F_OK);
-    await unlink(filePath);
+    await fs.promises.access(deleteResult.path, fs.constants.F_OK);
+    await unlink(deleteResult.path);
 
     return {
       success: true,
@@ -227,7 +226,6 @@ exports.deleteImage = async (id) => {
     throw new Error(`El recurso no se ha sido eliminado : ${messageError}`);
   }
 };
-
 
 exports.deleteRegistImage = async (id) => {
   try {

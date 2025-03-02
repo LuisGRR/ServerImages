@@ -36,7 +36,8 @@ exports.deleteImage = async (req, res) => {
 
 exports.rezise = async (req, res) => {
   try {
-    ImageService.reziseImage(req.body);
+    const imageData = await ImageService.reziseImage(req.body);
+    DuplicateImageService.saveImage(imageData);
     res.status(200).json({
       message: "El recurso ha se ha redimensionar exitosamente",
     });
@@ -50,7 +51,9 @@ exports.rezise = async (req, res) => {
 
 exports.convert = async (req, res) => {
   try {
-    ImageService.convertImage(req.body);
+    const imageData = await ImageService.convertImage(req.body);
+    DuplicateImageService.saveImage(imageData);
+
     res.status(200).json({
       message: `El recurso ha sido convertido ${req.body.typeConvert} exitosamente`,
     });

@@ -45,6 +45,15 @@ exports.duplicateImageFindHash = async (hash) => {
   }
 };
 
+exports.duplicateImageFindHistograma = async () => {
+  try {
+    return await DuplicateImage.find();
+  } catch (err) {
+    //console.log(err)
+    throw new Error("Error al momento de buscar la imagen" + err);
+  }
+};
+
 exports.duplicateImageSave = async (duplicateImageModel) => {
   try {
     let duplicateImage = new DuplicateImage(duplicateImageModel);
@@ -56,9 +65,9 @@ exports.duplicateImageSave = async (duplicateImageModel) => {
   }
 };
 
-exports.duplicateImageInsertArray = async (hash, duplicateImageData) => {
+exports.duplicateImageInsertArray = async (id, duplicateImageData) => {
   try {
-    let duplicateImage = await DuplicateImage.findOne({ hash: hash });
+    let duplicateImage = await DuplicateImage.findById(id);
 
     duplicateImage.images_duplicate.push(duplicateImageData);
 

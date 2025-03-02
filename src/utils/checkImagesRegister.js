@@ -2,15 +2,17 @@ const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 
+const { IMAGE_UPLOADS_PATH } = require("../config/config");
+
 const Image = require("../services/imageService");
 const DuplicateImageService = require("../services/duplicateImageService");
+
+const checkIntegrityDB = require("./integrityDataBase");
 
 async function registerUnregisteredImages() {
   try {
     let cantiada = 0;
-    const imageFiles = await fs.promises.readdir(
-      path.join(__dirname, "../public/img/uploads")
-    );
+    const imageFiles = await fs.promises.readdir(IMAGE_UPLOADS_PATH);
     console.log("Revisando la carpeta de las imagenes alojadas ...");
 
     const registeredImages = await Image.findImageFileName();
@@ -25,7 +27,7 @@ async function registerUnregisteredImages() {
     for (const filename of imageFiles) {
       if (!registeredFilenames.includes(filename)) {
         const imageMetadata = await sharp(
-          path.join(__dirname, "../public/img/uploads", filename)
+          path.join(IMAGE_UPLOADS_PATH, filename)
         ).metadata();
 
         const imageData = {
@@ -71,6 +73,7 @@ async function registerUnregisteredImages() {
         "Todos los registros tienen archivos correspondientes en la carpeta."
       );
     }
+    checkIntegrityDB.checkIntegrityDB();
   } catch (error) {
     console.error("Error al registrar las imágenes:", error);
   }

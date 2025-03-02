@@ -12,7 +12,7 @@
                 <% groupedImages[year][month].forEach(image => { %>
                   <div class="card bg-white shadow-md rounded-lg overflow-hidden mb-4">
                     <a href="/image/<%= image._id %>">
-                      <img src="<%= image.path %>" alt="<%= image.title %>" loading="lazy" class="w-full h-auto"/>
+                      <img src="/api/image/<%= image.filename %>" alt="<%= image.title %>" loading="lazy" class="w-full h-auto"/>
                     </a>
                   </div>
                 <% }); %>

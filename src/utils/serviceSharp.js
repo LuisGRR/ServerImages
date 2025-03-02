@@ -1,12 +1,12 @@
 const sharp = require("sharp");
-const path = require("path");
+
+const { IMAGE_UPLOADS_PATH } = require("../config/config");
 
 async function metadataImage(image) {
   return new Promise((resolve, reject) => {
-    sharp(path.join(path.resolve(__dirname, '..'), "public", image))
+    sharp(image)
       .metadata()
       .then((metadata) => {
-
         resolve([metadata.height, metadata.width]);
       })
       .catch((err) => {
@@ -51,13 +51,13 @@ function metadataImageWidth(image) {
 
 async function reziseImage(pahtImg, filename, width, height, typeResize) {
   return new Promise((resolve, reject) => {
-    sharp(path.join(path.resolve(__dirname, '..'), 'public', pahtImg))
+    sharp(pahtImg)
       .resize({
         width: parseInt(width),
         height: parseInt(height),
-        fit: typeResize
+        fit: typeResize,
       })
-      .toFile(path.join(path.resolve(__dirname, '..'), "public/img/resize/") + filename)
+      .toFile(IMAGE_UPLOADS_PATH + filename)
       .then((result) => {
         resolve(result);
       })
@@ -65,11 +65,11 @@ async function reziseImage(pahtImg, filename, width, height, typeResize) {
         reject(err);
       });
   })
-    .then(message => {
+    .then((message) => {
       console.log(message);
     })
-    .catch(err => {
-      console.log(err)
+    .catch((err) => {
+      console.log("reziseImage: "+err);
     });
 }
 
@@ -78,5 +78,5 @@ module.exports = {
   metadataImageHeight: metadataImageHeight,
   metadataImageWidth: metadataImageWidth,
   reziseImage: reziseImage,
-  metadataMimetype:metadataMimetype
+  metadataMimetype: metadataMimetype,
 };

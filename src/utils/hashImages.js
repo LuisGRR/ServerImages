@@ -1,30 +1,19 @@
+const sharp = require("sharp");
 const crypto = require("crypto");
-const path = require("path");
-const fs = require("fs");
 
-function generateImageHash(imagePath) {
-  return new Promise((resolve, reject) => {
-    const hash = crypto.createHash("sha256");
-    const stream = fs.createReadStream(
-      path.join(path.resolve(__dirname, ".."), "public", imagePath)
-    );
+//no importa el tamañp y el formato contina generando hash difetentes apesar visualmente iguales
+async function generateImageHash(imagePath) {
+  const imageBuffer = await sharp(imagePath)
+    .resize(300, 300) // Redimensionar a un tamaño estándar
+    .jpeg({ quality: 100 }) // Convertir a JPEG con calidad máxima
+    .raw() // Obtener los datos de píxeles sin compresión
+    .toBuffer({ resolveWithObject: true });
 
-    stream.on("data", (data) => {
-      hash.update(data);
-    });
-
-    stream.on("end", () => {
-      resolve(hash.digest("hex"));
-    });
-
-    stream.on("error", (err) => {
-      reject(err);
-    });
-  });
+  const hash = crypto.createHash("sha256");
+  hash.update(imageBuffer.data); // Actualizar el hash con los datos de píxeles
+  return hash.digest("hex"); // Devolver el hash en formato hexadecimal
 }
-
 
 module.exports = {
   generateImageHash: generateImageHash,
 };
-

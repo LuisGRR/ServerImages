@@ -1,20 +1,13 @@
 const sharp = require('sharp');
 const path = require("path");
-const fs = require('fs');
+//const fs = require('fs');
 
+const { IMAGE_UPLOADS_PATH } = require("../config/config");
 
 const convertImageFormat = async (inputPath, filename, format) => {
-    const resolvedInputPath = path.join(path.resolve(__dirname, '..'), 'public', inputPath);
 
-    const outputDir = path.join(path.resolve(__dirname, '..'), 'public/img/convert/');
-
-    /// Ensure the output directory exists
-    if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir, { recursive: true });
-    }
-
-    const outputPath = path.join(outputDir, `${filename}.${format}`);
-    const image = sharp(resolvedInputPath);
+    const outputPath = path.join(IMAGE_UPLOADS_PATH, `${filename}.${format}`);
+    const image = sharp(inputPath);
 
     switch (format.toLowerCase()) {
         case 'png':
@@ -30,10 +23,6 @@ const convertImageFormat = async (inputPath, filename, format) => {
         default:
             throw new Error('Unsupported format');
     }
-
-    console.log("convertImageFormat.resolvedInputPath: "+resolvedInputPath);
-    console.log("convertImageFormat.outputPath: "+outputPath);
-
 
     console.log(`Image converted and saved to ${outputPath}`);
     return outputPath;

@@ -3,15 +3,15 @@
   <body>
     <%- include("partials/navbar.ejs") %>
 
-      <section class="h-full w-full">
-        <div class="px-5 pt-2">
+      <section class="">
+        <div class="px-5 pt-2 max-w-screen overflow-x-auto">
           <table class="table w-full">
             <thead>
               <tr>
                 <th>
                   image
                 </th>
-                <th>
+                <th class="w-10">
                   title
                 </th>
                 <th>
@@ -20,9 +20,6 @@
                 <th>
                   filename
                 </th>
-                <!--th>
-                  path
-                </th-->
                 <th>
                   Rezise
                 </th>
@@ -34,26 +31,22 @@
                   <td>
                     <div class="avatar">
                       <div class="mask mask-squircle w-14 h-14">
-                        <img src="<%= image.path %>" alt=" <%= image.title %>" />
+                        <img src="/api/image/<%= image.filename %>" alt=" <%= image.title %>" />
                       </div>
                     </div>
                   </td>
 
-                  <td class="truncate whitespace-nowrap">
-                    <%= image.title %>
+                  <td class="  whitespace-nowrap">
+                    <p class=" leading-10 truncate"><%= image.title %></p>
                   </td>
 
                   <td class=" truncate whitespace-nowrap">
                     <%= image.description %>
                   </td>
 
-                  <td class="whitespace-nowrap truncate">
+                  <td class="whitespace-nowrap leading-10 truncate">
                     <%= image.filename %>
                   </td>
-
-                  <!--td class="whitespace-nowrap truncate">
-                    <%= image.path %>
-                  </td-->
                   <td class="truncate whitespace-nowrap">
                     <a href="/image/<%= image._id%>/rezise" class="btn-link">Rezise</a>
                   </td>

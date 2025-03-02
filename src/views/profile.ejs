@@ -17,11 +17,11 @@
         <div class="col-span-1 order-2 md:order-1 md:col-span-2 flex flex-col gap-3 border-r-2">
           <div class="px-4">
             <h2 class="not-italic font-normal leading-10 truncate " >
-              Url: <a class="link" target="_blank" href="<%= image.path %>">
+              Url: <a class="link" target="_blank" href="/api/image/<%= image.filename %>">
                 <%= image.filename %>
               </a>
             </h2>
-            <p class="not-italic font-normal leading-10">
+            <p class="not-italic font-normal leading-10 truncate">
               Title: <%= image.title %>
             </p>
             <p class="not-italic font-normal leading-10">
@@ -74,7 +74,7 @@
           </div>
         </div>
         <div class="col-span-1 order-1 md:order-2 md:col-span-4 flex justify-center w-[calc(33.33% - 30px)] h-screen">
-          <img src="<%= image.path%>" alt="images.title" class=" " />
+          <img src="/api/image/<%= image.filename %>" alt="images.title" class=" " />
         </div>
 
 
