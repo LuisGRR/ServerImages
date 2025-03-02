@@ -13,7 +13,7 @@
     "build:css": "postcss src/styles/index.css -o src/public/css/tailwind.css",
     "prepare": "husky install",
     "lint": "eslint .",
-    "start": "NODE_ENV=production node index.js"
+    "start": "NODE_ENV=production node src/index.js"
   },
   "keywords": [],
   "author": "",
