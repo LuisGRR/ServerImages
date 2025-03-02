@@ -18,6 +18,9 @@ require("./watchers/imageWatcher");
 
 const { IMAGE_UPLOADS_PATH } = require("./config/config");
 
+const requestLogger = require("./middlewares/logger");
+const errorLogger = require("./middlewares/errorLogger");
+
 //initializiones
 const app = express();
 require("./config/database");
@@ -41,6 +44,9 @@ app.use(
   })
 );
 
+app.use(requestLogger);
+app.use(errorLogger);
+
 // => Here we expose your dist folder
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -60,6 +66,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const server = app.listen(app.get("port"), () => {
   console.log(`Server on port ${app.get("port")}`);
   console.log(`Carpeta de al macenamiento de imagenes ${IMAGE_UPLOADS_PATH}`);
+
 
   checkImagesRegister.registerUnregisteredImages();
 });
