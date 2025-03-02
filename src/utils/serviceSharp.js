@@ -19,7 +19,6 @@ async function metadataImage(image) {
 async function metadataMimetype(filePath) {
   try {
     const metadata = await sharp(filePath).metadata();
-    //console.log(metadata.format);
     return metadata.format;
   } catch (err) {
     console.log(`Error al obtener metadataImageHeight de la imagen: ${err}`);

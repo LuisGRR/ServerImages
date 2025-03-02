@@ -21,9 +21,7 @@ exports.images = async (req, res) => {
 exports.imageLoad = async (req, res) => {
   try {
     const filename = req.params.filename;
-    console.log(filename);
     const imagePath = path.join(IMAGE_UPLOADS_PATH, filename);
-    console.log(imagePath);
 
     fs.access(imagePath, fs.constants.F_OK, (err) => {
       if (err) {

@@ -186,7 +186,7 @@ exports.editImage = async (id, data) => {
 };
 
 exports.deleteImage = async (id) => {
-  console.log("deleteImage called with id:", id); // Log inicial
+  console.log("deleteImage called"); // Log inicial
 
   if (!id || !mongoose.Types.ObjectId.isValid(id)) {
     throw new Error("ID de imagen inválido.");

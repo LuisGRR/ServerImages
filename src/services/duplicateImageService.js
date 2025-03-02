@@ -92,11 +92,8 @@ exports.deleteImageDuplicate = async (id) => {
           });
         await dataImageArray.save();
         
-        console.log(dataImageArray.images_duplicate.length);
         // Si el array queda vacío, eliminar el registro completo
         if (dataImageArray.images_duplicate.length === 0) {
-          console.log(dataImageArray);
-          console.log(dataImageArray.images_duplicate);
           await duplicateImageRepository.duplicateImageDelete(
             dataImageArray.imagen_id
           );

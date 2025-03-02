@@ -7,7 +7,6 @@ exports.uploadImage = async (req, res) => {
     DuplicateImageService.saveImage(imageData);
     res.redirect("/home");
   } catch (err) {
-    //console.log(`Error al obtener metadata de la imagen: ${err}`);
     res.status(500).json({
       ok: false,
       message: "Error al guardar la imagen en la base de datos.",
@@ -42,7 +41,6 @@ exports.rezise = async (req, res) => {
       message: "El recurso ha se ha redimensionar exitosamente",
     });
   } catch (err) {
-    //console.log(`Error al manipular la imagen: ${err}`);
     res
       .status(500)
       .json({ ok: false, message: "Error al redimensionar la imagen" });

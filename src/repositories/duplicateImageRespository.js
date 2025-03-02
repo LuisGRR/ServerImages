@@ -8,7 +8,6 @@ exports.duplicateImageFind = async () => {
       .sort({ created_at: 1 })
       .exec();
   } catch (err) {
-    //console.log(err)
     throw new Error("Error al momento de buscar la imagen" + err);
   }
 };
@@ -20,7 +19,6 @@ exports.duplicateImageFindImagen_id = async (imageId) => {
     });
     return data;
   } catch (err) {
-    //console.log(err)
     throw new Error("Error al momento de buscar la imagen" + err);
   }
 };
@@ -31,7 +29,6 @@ exports.duplicateImageFindImages_duplicateImagen_id = async (imageId) => {
       images_duplicate: { $elemMatch: { imagen_id: imageId } },
     });
   } catch (err) {
-    //console.log(err)
     throw new Error("Error al momento de buscar la imagen" + err);
   }
 };
@@ -40,7 +37,6 @@ exports.duplicateImageFindHash = async (hash) => {
   try {
     return await DuplicateImage.findOne({ hash: hash });
   } catch (err) {
-    //console.log(err)
     throw new Error("Error al momento de buscar la imagen" + err);
   }
 };
@@ -49,7 +45,6 @@ exports.duplicateImageFindHistograma = async () => {
   try {
     return await DuplicateImage.find();
   } catch (err) {
-    //console.log(err)
     throw new Error("Error al momento de buscar la imagen" + err);
   }
 };
@@ -60,7 +55,6 @@ exports.duplicateImageSave = async (duplicateImageModel) => {
 
     await duplicateImage.save();
   } catch (err) {
-    //console.log(err)
     throw new Error("Error al momento de guardar la imagen" + err);
   }
 };
@@ -73,7 +67,6 @@ exports.duplicateImageInsertArray = async (id, duplicateImageData) => {
 
     await duplicateImage.save();
   } catch (err) {
-    //console.log(err)
     throw new Error("Error al momento de guardar la imagen" + err);
   }
 };

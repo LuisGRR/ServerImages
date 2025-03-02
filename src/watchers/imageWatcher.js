@@ -21,12 +21,11 @@ const watcher = chokidar.watch(imagesDirectory, {
 watcher.on("add", async (filePath) => {
   const fileName = path.basename(filePath); // Obtener el nombre del archivo
 
-  console.log("chokidar.watch: " +fileName);
   // Verificar si el archivo ya fue procesado por Multer
   if (processedFiles.hasFile(fileName)) {
-    console.log(
+  /*console.log(
       `El archivo "${fileName}" fue procesado por Multer. Ignorando...`
-    );
+    );*/
     processedFiles.removeFile(fileName); // Eliminarlo del conjunto después de ignorarlo
     return;
   }
@@ -81,7 +80,6 @@ watcher.on("add", async (filePath) => {
 // Evento cuando se elimina un archivo
 watcher.on("unlink", async (filePath) => {
   const fileName = path.basename(filePath); // Obtener el nombre del archivo
-  //console.log(`Imagen eliminada: ${fileName} (${filePath})`);
   try {
     // Aquí puedes agregar la lógica para manejar la eliminación de la imagen
     const registeredImages = await Image.findImageFileName();

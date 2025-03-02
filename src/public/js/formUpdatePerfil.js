@@ -5,10 +5,6 @@ form.addEventListener("submit", async function (event) {
   event.preventDefault(); // Prevent the default form submission
 
   const formData = new FormData(form);
-  // Usando forEach
-  formData.forEach((value, key) => {
-    console.log(`${key}: ${value}`);
-  });
 
   try {
     const response = await fetch(`/update-perfil/${id.value}`, {
@@ -35,6 +31,5 @@ form.addEventListener("submit", async function (event) {
       title: "Oops...",
       text: "Something went wrong to the save image!",
     });
-    //console.log("Error:" + error);
   }
 });

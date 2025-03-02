@@ -175,6 +175,5 @@ form.addEventListener("submit", async function (event) {
       title: "Oops...",
       text: "Something went wrong to the save image!",
     });
-    //console.log("Error:" + error);
   }
 });

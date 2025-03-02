@@ -24,7 +24,6 @@ const convertImageFormat = async (inputPath, filename, format) => {
             throw new Error('Unsupported format');
     }
 
-    console.log(`Image converted and saved to ${outputPath}`);
     return outputPath;
 };
 

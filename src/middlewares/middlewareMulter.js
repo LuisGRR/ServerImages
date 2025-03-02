@@ -7,7 +7,6 @@ const processedFiles = require("../utils/processedFiles");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file.fieldname);
     if (file.fieldname === "avatar") {
       cb(null, path.join(__dirname, "../public/img/avatar"));
     } else {
@@ -17,7 +16,6 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const filename = uuidv4() + path.extname(file.originalname);
     processedFiles.addFile(filename);
-    console.log("multer.diskStorage: " + filename);
     cb(null, filename);
 
   },

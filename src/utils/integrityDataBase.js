@@ -10,7 +10,7 @@ async function checkIntegrityDB() {
 
   if (images.length === 0 && imagesDuplicate.length > 0) {
     console.log("No se encontraron datos de imagenes, se limpia bd");
-   await DuplicateImage.deleteMany({});
+    await DuplicateImage.deleteMany({});
   }
 }
 
