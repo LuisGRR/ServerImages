@@ -21,6 +21,10 @@ exports.findImage = async () => {
   return await ImageRespository.ImageFind();
 };
 
+exports.findImagePaginateApi = async (skip, limit) => {
+  return await ImageRespository.ImageFindPaginate(skip, limit);
+};
+
 exports.findImage = async () => {
   return await ImageRespository.ImageFind();
 };

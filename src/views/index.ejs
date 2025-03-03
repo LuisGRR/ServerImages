@@ -2,25 +2,83 @@
 <% const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]; %>
   <body>
     <%- include("partials/navbar.ejs") %>
-      <main class="w-full h-full">
-          <% Object.keys(groupedImages).forEach(year => { %>
-          <div class="divider"><%= year %></div>
+<main class="w-full h-full">
+        <!--h1 class="text-2xl font-bold mb-4 text-center">Archivos</h1 -->
+        <section id="filesContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 px-5 mb-5">
+        </section>
 
-            <% Object.keys(groupedImages[year]).forEach(month => { %>
-              <div class="divider"><%= monthNames[month - 1]  %></div>
-              <section class="columns-2 md:columns-6 px-5 mb-5 gap-4">
-                <% groupedImages[year][month].forEach(image => { %>
-                  <div class="card bg-white shadow-md rounded-lg overflow-hidden mb-4">
-                    <a href="/image/<%= image._id %>">
-                      <img src="/api/image/<%= image.filename %>" alt="<%= image.title %>" loading="lazy" class="w-full h-auto"/>
-                    </a>
-                  </div>
-                <% }); %>
-              </section>
+        <p id="noMoreFiles" class="mt-4 text-gray-600 text-center hidden">No hay más archivos para cargar.</p>
+    </main>
 
-            <% }); %>
-          <% }); %>
-      </main>
+
+      <script>
+        let currentPage = 1;
+        const limit = 20; // Número de resultados por página
+        let hasNextPage = true;
+
+        const fetchFiles = async (page) => {
+            const skip = (page - 1) * limit;
+            const response = await fetch(`/api/images?skip=${skip}&limit=${limit}`);
+            if (!response.ok) {
+                throw new Error('Error al cargar los archivos');
+            }
+            const data = await response.json();
+            return data;
+        };
+
+        const loadFiles = async () => {
+            if (!hasNextPage) return;
+
+            try {
+                const data = await fetchFiles(currentPage);
+                const filesContainer = document.getElementById('filesContainer');
+
+                // Verificar si hay archivos para mostrar
+                if (data.files.length === 0) {
+                    hasNextPage = false;
+                    document.getElementById('noMoreFiles').classList.remove('hidden');
+                    return;
+                }
+
+                data.files.forEach(image => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white shadow-md rounded-lg overflow-hidden mb-4 h-80'; // Altura fija para todas las tarjetas
+                    card.innerHTML = `
+                        <a href="/image/${image._id}">
+                            <div class="h-full w-full flex items-center justify-center overflow-hidden">
+                                <img src="/api/image/${image.filename}" alt="${image.title}" loading="lazy" class="object-contain h-full w-full"/>
+                            </div>
+                        </a>
+                    `;
+                    filesContainer.appendChild(card);
+                });
+
+                hasNextPage = data.hasNextPage;
+                if (!hasNextPage) {
+                    document.getElementById('noMoreFiles').classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error al cargar archivos:', error);
+            }
+        };
+
+        const handleScroll = () => {
+            const scrollPosition = window.innerHeight + window.scrollY;
+            const bottomPosition = document.documentElement.offsetHeight;
+
+            // Si el usuario ha llegado al final de la página
+            if (scrollPosition >= bottomPosition - 100) { // 100px antes de llegar al final
+                currentPage++;
+                loadFiles();
+            }
+        };
+
+        // Cargar archivos al inicio
+        loadFiles();
+
+        // Escuchar el evento de scroll
+        window.addEventListener('scroll', handleScroll);
+    </script>
   </body>
 
   </html>

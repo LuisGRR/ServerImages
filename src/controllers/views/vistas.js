@@ -6,7 +6,7 @@ exports.index = async (req, res) => {
   try {
     let avatar = req.session.avatar;
 
-    const images = await Image.imageAggregateCreateAt();
+    /*const images = await Image.imageAggregateCreateAt();
 
     const groupedImages = images.reduce((acc, curr) => {
       const year = curr._id.year;
@@ -25,9 +25,9 @@ exports.index = async (req, res) => {
       // Agregar las imágenes al mes correspondiente
       acc[year][month] = acc[year][month].concat(curr.images);
       return acc;
-    }, {});
+    }, {});*/
 
-    res.render("index", { groupedImages, avatar });
+    res.render("index", { avatar });
   } catch (error) {
     res.status(500).send("error interno del servidor");
   }

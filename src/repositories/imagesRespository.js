@@ -9,6 +9,47 @@ class ImageRespository {
       throw new Error("Error al momento de obtener las images");
     }
   }
+  async ImageFindPaginate(skip, limit) {
+    try {
+      // let images = await Image.find()
+      //   .sort({ created_at: -1 })
+      //   .skip(skip)
+      //   .limit(limit)
+      //   .select("_id title filename created_at")
+      //   .exec();
+      return await Image.aggregate([
+        {
+          $facet: {
+            paginatedResults: [
+              {
+                $skip: skip, // Aplicar paginación
+              },
+              {
+                $limit: limit, // Limitar el número de resultados
+              },
+              {
+                $project: {
+                  // Seleccionar solo los campos necesarios
+                  _id: 1,
+                  title: 1,
+                  filename: 1,
+                  created_at: 1,
+                },
+              },
+            ],
+            totalCount: [
+              {
+                $count: "count", // Contar el total de archivos
+              },
+            ],
+          },
+        },
+      ]);
+      //return images;
+    } catch (err) {
+      throw new Error("Error al momento de obtener las images");
+    }
+  }
 
   async imageAggregateCreateAt() {
     let imagesAgregate = await Image.aggregate([
